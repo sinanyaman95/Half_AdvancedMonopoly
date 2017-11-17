@@ -1,10 +1,14 @@
 package domain;
 
+import java.util.ArrayList;
+
 public class Player {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
+	private String name;
+	private int position;
+	private double balance;
+	private ArrayList<Square> ownedProperties;
+	
+	
+	
 }
