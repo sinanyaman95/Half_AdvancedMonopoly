@@ -1,5 +1,7 @@
 package domain;
 
-public interface Square {
+public class Square {
+	 BuyableBehavior buyable;
+	private String name;
 
 }
