@@ -7,7 +7,7 @@ public class Player {
 	private String name;
 
 
-	private int position=0;
+	private int position;
 	private double balance;
 	ArrayList<TitleDeed> ownedTitleDeeds=new ArrayList<TitleDeed>();
 	ArrayList<Company> ownedCompanies=new ArrayList<Company>();
@@ -39,6 +39,15 @@ public class Player {
 
 	public String getName() {
 		return name;
+	}
+	
+	public int getPosition() {
+		return this.position;
+	}
+
+	public ArrayList<Company> getOwnedCompanies() {
+		// TODO Auto-generated method stub
+		return this.getOwnedCompanies();
 	}
 	
 }

@@ -18,7 +18,6 @@ class RegularDice implements Dice{
 		
 	}
 	
-	private String val;
 	@Override
 	public void roll() {
 		// TODO Auto-generated method stub
