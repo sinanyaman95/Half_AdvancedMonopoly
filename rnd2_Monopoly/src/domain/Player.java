@@ -14,9 +14,17 @@ public class Player {
 
 	
 	
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
+
 	public Player(String name, double balance) {
-		name=this.name;
-		balance=this.balance;
+		this.name=name;
+		this.balance=balance;
 		
 		
 	}
