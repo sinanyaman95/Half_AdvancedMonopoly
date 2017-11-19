@@ -1,6 +1,6 @@
 package domain;
 
-public class ActionSquare implements Square {
+public abstract class ActionSquare implements Square {
 
 	public ActionSquare(String name) {
 		super();

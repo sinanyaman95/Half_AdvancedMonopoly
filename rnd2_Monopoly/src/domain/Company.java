@@ -9,7 +9,15 @@ public class Company extends PropertySquare {
 
 	@Override
 	public void performPurchase(Player p, PropertySquare s) {
-		// TODO Auto-generated method stub
+		// if the owner of the title deed is the bank
+		// (no one owns the title deed), assign the new owner and update balance
+		if (s.getOwner().getName().equals("Bank") && p.getBalance() >= s.getPrice()) {
+			MonopolyGameController.bank.getOwnedCompanies().remove(s);
+			s.setOwner(p);
+			p.getOwnedCompanies().add((Company)s);
+			p.setBalance(p.getBalance() - s.getPrice());
+
+		}
 		
 	}
 

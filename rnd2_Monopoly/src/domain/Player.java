@@ -7,7 +7,7 @@ public class Player {
 	private String name;
 
 
-	private int position=0;
+	private int position;
 	private double balance;
 	ArrayList<TitleDeed> ownedTitleDeeds=new ArrayList<TitleDeed>();
 	ArrayList<Company> ownedCompanies=new ArrayList<Company>();
@@ -15,6 +15,7 @@ public class Player {
 	
 	
 	public Player(String name, double balance) {
+		this.position=0;
 		name=this.name;
 		balance=this.balance;
 		
@@ -41,4 +42,16 @@ public class Player {
 		return name;
 	}
 	
+	public int getPosition() {
+		return this.position;
+	}
+
+	public ArrayList<Company> getOwnedCompanies() {
+		return this.getOwnedCompanies();
+	}
+	
+	public void move(int value) {
+		this.position = (this.position + value) % 120;
+		
+	}
 }

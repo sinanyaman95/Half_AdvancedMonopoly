@@ -1,11 +1,8 @@
 package domain;
 
 public class TitleDeed extends PropertySquare {
-	public String name;
-	public int price;
-	public int rent;
-	public int mortgageValue;
-	public Player owner;
+	
+
 	public String color;
 	
 	public boolean twoColorDeed;
