@@ -16,11 +16,18 @@ public class Player {
 	
 	public Player(String name, double balance) {
 		this.position=0;
-		name=this.name;
-		balance=this.balance;
+		this.name=name;
+		this.balance=balance;
+
 		
 		
 	}
+	
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
+
 	
 	public void buyProperty(PropertySquare p) {
 		p.performPurchase(this, p);

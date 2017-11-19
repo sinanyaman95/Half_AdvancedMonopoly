@@ -4,7 +4,7 @@ public class Company extends PropertySquare {
 
 	public Company(String name) {
 		super();
-	
+		this.name = name;
 	}
 
 	@Override
@@ -44,5 +44,13 @@ public class Company extends PropertySquare {
 		// TODO Auto-generated method stub
 		
 	}
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 
 }
