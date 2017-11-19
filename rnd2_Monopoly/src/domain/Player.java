@@ -9,7 +9,9 @@ public class Player {
 
 	private int position=0;
 	private double balance;
-	private ArrayList<Square> ownedProperties=new ArrayList<Square>();
+	ArrayList<TitleDeed> ownedTitleDeeds=new ArrayList<TitleDeed>();
+	ArrayList<Company> ownedCompanies=new ArrayList<Company>();
+
 	
 	
 	public Player(String name, double balance) {
@@ -19,12 +21,12 @@ public class Player {
 		
 	}
 	
-	public void buyProperty(Square p) {
-		p.performPurchase(this);
+	public void buyProperty(PropertySquare p) {
+		p.performPurchase(this, p);
 	}
 
-	public ArrayList<Square> getOwnedProperties() {
-		return ownedProperties;
+	public ArrayList<TitleDeed> getOwnedTitleDeeds() {
+		return this.ownedTitleDeeds;
 	}
 
 	public double getBalance() {
