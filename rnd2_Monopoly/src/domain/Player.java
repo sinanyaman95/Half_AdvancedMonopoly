@@ -15,6 +15,7 @@ public class Player {
 	
 	
 	public Player(String name, double balance) {
+		this.position=0;
 		name=this.name;
 		balance=this.balance;
 		
@@ -46,8 +47,11 @@ public class Player {
 	}
 
 	public ArrayList<Company> getOwnedCompanies() {
-		// TODO Auto-generated method stub
 		return this.getOwnedCompanies();
 	}
 	
+	public void move(int value) {
+		this.position = (this.position + value) % 120;
+		
+	}
 }
