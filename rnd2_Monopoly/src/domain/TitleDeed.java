@@ -174,6 +174,59 @@ public class TitleDeed extends PropertySquare {
 		
 	}
 
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getRent() {
+		return rent;
+	}
+
+	public void setRent(int rent) {
+		this.rent = rent;
+	}
+
+	public int getMortgageValue() {
+		return mortgageValue;
+	}
+
+	public void setMortgageValue(int mortgageValue) {
+		this.mortgageValue = mortgageValue;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public boolean isTwoColorDeed() {
+		return twoColorDeed;
+	}
+
+	public void setTwoColorDeed(boolean twoColorDeed) {
+		this.twoColorDeed = twoColorDeed;
+	}
+
+	public boolean isThreeColorDeed() {
+		return threeColorDeed;
+	}
+
+	public void setThreeColorDeed(boolean threeColorDeed) {
+		this.threeColorDeed = threeColorDeed;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
 
 
 }
