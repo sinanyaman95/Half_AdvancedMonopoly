@@ -1,7 +1,7 @@
 package domain;
 
 public class Company extends PropertySquare {
-	public String name;
+	
 	
 	public Company(String name) {
 		super();
