@@ -2,21 +2,75 @@ package domain;
 
 public class TitleDeed extends PropertySquare {
 	
-
-	public String color;
+	public int price;
+	public int rent;
+	public int mortgageValue;
+	public Player owner;
+	
 	
 	public boolean twoColorDeed;
 	public boolean threeColorDeed;
 	public int numberOfHouses;
 	public int numberOfHotels;
 	public int numberOfSkyscrapers;
+	
+	public String getName() {
+		return name;
+	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getRent() {
+		return rent;
+	}
+
+	public void setRent(int rent) {
+		this.rent = rent;
+	}
+
+	public int getMortgageValue() {
+		return mortgageValue;
+	}
+
+	public void setMortgageValue(int mortgageValue) {
+		this.mortgageValue = mortgageValue;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public boolean isTwoColorDeed() {
+		return twoColorDeed;
+	}
+
+	public void setTwoColorDeed(boolean twoColorDeed) {
+		this.twoColorDeed = twoColorDeed;
+	}
+
+	public boolean isThreeColorDeed() {
+		return threeColorDeed;
+	}
+
+	public void setThreeColorDeed(boolean threeColorDeed) {
+		this.threeColorDeed = threeColorDeed;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	
 	public TitleDeed(String tname,int priceVal,int rentVal,int mortgageVal,String clr) {
 		//update
 		super();
 		name=tname;
-		owner=MonopolyGameController.bank;
+		owner=MonopolyGameController.p1;
 		price=priceVal;
 		rent=rentVal;
 		mortgageValue=mortgageVal;
@@ -33,7 +87,7 @@ public class TitleDeed extends PropertySquare {
 			// if the owner of the title deed is the bank
 			// (no one owns the title deed), assign the new owner and update balance
 			if (s.getOwner().getName().equals("Bank") && p.getBalance() >= s.getPrice()) {
-				MonopolyGameController.bank.getOwnedTitleDeeds().remove(s);
+				MonopolyGameController.p1.getOwnedTitleDeeds().remove(s);
 				s.setOwner(p);
 				p.getOwnedTitleDeeds().add((TitleDeed)s);
 				p.setBalance(p.getBalance() - s.getPrice());

@@ -1,23 +1,19 @@
 package domain;
 
-import gui.StartingScreen;
-import org.json.JSONException;
+import java.io.IOException;
+
+import org.json.simple.parser.ParseException;
+
 public class Test {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, ParseException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
 		// TODO Auto-generated method stub
-	new StartingScreen();
-	
-	MonopolyGameController m = new MonopolyGameController();
-	m.initPlayers();
-	try {
-		m.SaveGame();
-	} catch (JSONException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		MonopolyGameController m = new MonopolyGameController();
+		//m.initPlayers();
+		//m.SaveGame();
+		m.LoadGame();
+		for(Player p: m.players) {
+			System.out.println(p.getName());
+		}
 	}
-
-
-	}
-
 }
