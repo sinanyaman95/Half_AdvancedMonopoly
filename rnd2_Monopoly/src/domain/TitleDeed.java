@@ -20,7 +20,7 @@ public class TitleDeed extends PropertySquare {
 		//update
 		super();
 		name=tname;
-		owner=MonopolyGameController.p1;
+		owner=MonopolyGameController.bank;
 		price=priceVal;
 		rent=rentVal;
 		mortgageValue=mortgageVal;
@@ -37,7 +37,7 @@ public class TitleDeed extends PropertySquare {
 			// if the owner of the title deed is the bank
 			// (no one owns the title deed), assign the new owner and update balance
 			if (s.getOwner().getName().equals("Bank") && p.getBalance() >= s.getPrice()) {
-				MonopolyGameController.p1.getOwnedTitleDeeds().remove(s);
+				MonopolyGameController.bank.getOwnedTitleDeeds().remove(s);
 				s.setOwner(p);
 				p.getOwnedTitleDeeds().add((TitleDeed)s);
 				p.setBalance(p.getBalance() - s.getPrice());
