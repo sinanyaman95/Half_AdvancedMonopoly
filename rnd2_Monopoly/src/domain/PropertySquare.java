@@ -3,6 +3,10 @@ package domain;
 public abstract class PropertySquare implements Square {
 	public String name;
 	public String color;
+	public int price;
+	public int rent;
+	public int mortgageValue;
+	public Player owner;
 
 	public abstract void performPurchase(Player p, PropertySquare s);
 
