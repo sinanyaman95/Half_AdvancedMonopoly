@@ -30,7 +30,7 @@ public class MonopolyGameController {
 
 	
 	public  void initPlayers() {
-		players.add(p1);
+		players.add(bank);
 		players.add(p2);
 		players.add(p3);
 		players.add(p4);
