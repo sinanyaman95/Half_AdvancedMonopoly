@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 public class MonopolyGameController {
 	public static ArrayList<Player> players = new ArrayList<Player>();
 
-	public static  Player p1=new Player("Bank", 999999999);
+	public static  Player bank=new Player("Bank", 999999999);
 	public  Player p2= null;
 	public  Player p3= null;
 	public  Player p4= null;
@@ -30,7 +30,7 @@ public class MonopolyGameController {
 
 	
 	public  void initPlayers() {
-		players.add(p1);
+		players.add(bank);
 		players.add(p2);
 		players.add(p3);
 		players.add(p4);
