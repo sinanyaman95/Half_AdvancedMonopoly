@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import domain.*;
+import domain.squares.TitleDeed;
 
 public class PlayerGUI {
 	public JPanel playerStatPanel=new JPanel();

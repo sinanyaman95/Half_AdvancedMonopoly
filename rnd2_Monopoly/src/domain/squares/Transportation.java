@@ -1,9 +1,12 @@
-package domain;
+package domain.squares;
 
-public class Company extends PropertySquare {
+import domain.MonopolyGameController;
+import domain.Player;
+
+public class Transportation extends PropertySquare {
 	
 	
-	public Company(String name) {
+	public Transportation(String name) {
 		super();
 		this.name = name;
 	}
@@ -15,9 +18,9 @@ public class Company extends PropertySquare {
 		// if the owner of the title deed is the bank
 		// (no one owns the title deed), assign the new owner and update balance
 		if (s.getOwner().getName().equals("Bank") && p.getBalance() >= s.getPrice()) {
-			MonopolyGameController.bank.getOwnedCompanies().remove(s);
+			MonopolyGameController.bank.getOwnedTransportation().remove(s);
 			s.setOwner(p);
-			p.getOwnedCompanies().add((Company)s);
+			p.getOwnedTransportation().add((Transportation)s);
 			p.setBalance(p.getBalance() - s.getPrice());
 
 		}
@@ -37,7 +40,7 @@ public class Company extends PropertySquare {
 	}
 
 	@Override
-	public double getPrice() {
+	public int getPrice() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
