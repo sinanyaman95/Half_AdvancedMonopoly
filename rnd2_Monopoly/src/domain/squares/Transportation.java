@@ -3,7 +3,7 @@ package domain.squares;
 import domain.MonopolyGameController;
 import domain.Player;
 
-public class Transportation extends PropertySquare {
+public abstract class Transportation extends PropertySquare {
 	
 	
 	public Transportation(String name) {

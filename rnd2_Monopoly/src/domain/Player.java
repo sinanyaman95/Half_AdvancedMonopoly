@@ -31,7 +31,12 @@ public class Player {
 	@Expose
 	ArrayList<Transportation> ownedTransportation=new ArrayList<Transportation>();
 
+	public Player(String name, double balance) {
+		this.name=name;
+		this.balance=balance;
 
+
+	}
 
 	public int getPosition() {
 		return position;
@@ -41,12 +46,7 @@ public class Player {
 		this.position = position;
 	}
 
-	public Player(String name, double balance) {
-		this.name=name;
-		this.balance=balance;
-
-
-	}
+	
 
 	public void buyProperty(PropertySquare p) {
 		p.performPurchase(this, p);
