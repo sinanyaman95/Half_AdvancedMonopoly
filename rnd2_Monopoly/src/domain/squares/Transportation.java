@@ -13,50 +13,24 @@ public abstract class Transportation extends PropertySquare {
 
 
 
-	@Override
-	public void performPurchase(Player p, PropertySquare s) {
-		// if the owner of the title deed is the bank
-		// (no one owns the title deed), assign the new owner and update balance
-		if (s.getOwner().getName().equals("Bank") && p.getBalance() >= s.getPrice()) {
-			MonopolyGameController.bank.getOwnedTransportation().remove(s);
-			s.setOwner(p);
-			p.getOwnedTransportation().add((Transportation)s);
-			p.setBalance(p.getBalance() - s.getPrice());
+	
+	public abstract void performPurchase(Player p, PropertySquare s);
 
-		}
-		
-	}
+	
+	public abstract Player getOwner();
 
-	@Override
-	public Player getOwner() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	public abstract void setOwner(Player owner);
 
-	@Override
-	public void setOwner(Player owner) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	public abstract int getPrice();
 
-	@Override
-	public int getPrice() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
+	public abstract void calculateRent();
+	
+	public abstract String getName();
 
-	@Override
-	public void calculateRent() {
-		// TODO Auto-generated method stub
-		
-	}
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	public abstract void setName(String name);
 
 
 }
