@@ -59,7 +59,7 @@ public class MonopolyBoard {
 		pppanel.add(pnl2);
 		frame.getContentPane().add(pppanel);
 		
-		for (Player p : MonopolyGameController.playerList) {
+		for (Player p : MonopolyGameController.players) {
 
 			PlayerGUI g=new PlayerGUI(p);
 			

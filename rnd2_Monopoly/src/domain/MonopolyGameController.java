@@ -15,6 +15,7 @@ import org.json.simple.parser.ParseException;
 import com.google.gson.Gson;
 
 import domain.squares.TitleDeed;
+import domain.squares.Transportation;
 
 
 
@@ -22,17 +23,18 @@ public class MonopolyGameController {
 	public static ArrayList<Player> players = new ArrayList<Player>();
 
 	public static  Player bank=new Player("Bank", 999999999);
+	public  Player p1= null;
 	public  Player p2= null;
 	public  Player p3= null;
 	public  Player p4= null;
 	public  Player p5= null;
 	public  Player p6= null;
 	
-	
 
 	
 	public  void initPlayers() {
 		players.add(bank);
+		players.add(p1);
 		players.add(p2);
 		players.add(p3);
 		players.add(p4);
@@ -54,20 +56,20 @@ public class MonopolyGameController {
 			for(TitleDeed t: p.getOwnedTitleDeeds()) {
 				ownedDeeds.add(t.getName());
 			}
-			for(Company c: p.ownedCompanies) {
+			for(Transportation c: p.ownedTransportation) {
 				ownedCompanies.add(c.getName());
 			}
 			player.put("Name", p.getName());
 			player.put("Balance", p.getBalance());
 			player.put("Owned_Title_Deeds",ownedDeeds);
-			player.put("Owned_Companies", ownedCompanies);
+			player.put("Owned_Transportations", ownedCompanies);
 			player.put("Position", p.getPosition());
 			players_array.add(player);
 		}
 		object.put("players", players_array);
 		
 		try {
-			File file=new File("C:\\Users\\umur\\Desktop\\MonopolySaveJSON.json");
+			File file=new File("C:\\Users\\umur1\\Desktop\\MonopolySaveJSON.json");
 			file.createNewFile();
 			FileWriter fileWriter = new FileWriter(file);
 			System.out.println("Writing JSON object to file");
@@ -84,14 +86,16 @@ public class MonopolyGameController {
 		Gson gs = new Gson();
 		BufferedReader br = null;
 		try {
-			br = new BufferedReader(new FileReader("C:\\Users\\umur\\Desktop\\MonopolySaveJSON.json"));
+			br = new BufferedReader(new FileReader("C:\\Users\\umur1\\Desktop\\MonopolySaveJSON.json"));
 			PlayerMapper player = gs.fromJson(br, PlayerMapper.class);
 			if(player != null) {
 				int i=1;
 				for(Player p: player.getPlayers()) {
+					if(p != null) {
 					//System.out.println(p.getName() + " " + p.getBalance() + " " + p.getPosition() + " " + p.getOwnedTitleDeeds().toString());
 					getClass().getDeclaredField("p"+i).set(this, p);
 					i++;
+					}
 				}
 				initPlayers();
 			}

@@ -5,6 +5,7 @@ import javax.swing.JTextArea;
 
 import domain.*;
 import domain.squares.TitleDeed;
+import domain.squares.Transportation;
 
 public class PlayerGUI {
 	public JPanel playerStatPanel=new JPanel();
@@ -17,7 +18,7 @@ public class PlayerGUI {
 		for(TitleDeed td:p.getOwnedTitleDeeds()) {
 			propList.append(td.name);
 		}
-		for(Company c:p.getOwnedCompanies()) {
+		for(Transportation c:p.getOwnedTransportation()) {
 			propList.append(c.name);
 		}
 		

@@ -5,10 +5,12 @@ import domain.Player;
 
 public class TitleDeed extends PropertySquare {
 	
+	/*
 	public int price;
 	public int rent;
 	public int mortgageValue;
 	public Player owner;
+	*/
 	
 	
 	public boolean twoColorDeed;
