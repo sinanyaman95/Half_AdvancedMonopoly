@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.json.simple.parser.ParseException;
 
 import domain.squares.*;
+import gui.StartingScreen;
 
 public class Test {
 	
@@ -19,5 +20,6 @@ public class Test {
 		for(Player p: m.players) {
 			System.out.println(p.getName());
 		}
+		new StartingScreen();
 	}
 }

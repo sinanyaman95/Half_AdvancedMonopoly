@@ -26,20 +26,17 @@ public class TrainStation extends Transportation {
 
 	@Override
 	public Player getOwner() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.owner;
 	}
 
 	@Override
 	public void setOwner(Player owner) {
-		// TODO Auto-generated method stub
-		
+		this.owner=owner;
 	}
 
 	@Override
 	public int getPrice() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.price;
 	}
 
 	@Override
@@ -50,14 +47,12 @@ public class TrainStation extends Transportation {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.name;
 	}
 
 	@Override
 	public void setName(String name) {
-		// TODO Auto-generated method stub
-		
+		this.name=name;
 	}
 
 }
