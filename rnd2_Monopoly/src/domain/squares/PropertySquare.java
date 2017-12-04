@@ -1,13 +1,16 @@
-package domain;
+package domain.squares;
 
-public abstract class PropertySquare implements Square {
+import domain.Player;
+
+public abstract class PropertySquare extends Square {
 	public String name;
 	public String color;
 	public int price;
 	public int rent;
 	public int mortgageValue;
 	public Player owner;
-
+	public boolean mortgageStatus;
+	
 	public abstract void performPurchase(Player p, PropertySquare s);
 
 	public abstract Player getOwner();
@@ -16,6 +19,6 @@ public abstract class PropertySquare implements Square {
 
 	public abstract void setOwner(Player owner);
 
-	public abstract double getPrice();
+	public abstract int getPrice();
 
 }

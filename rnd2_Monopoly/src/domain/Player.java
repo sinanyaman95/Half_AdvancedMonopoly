@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import domain.squares.PropertySquare;
+import domain.squares.TitleDeed;
+import domain.squares.Transportation;
+
 public class Player {
 	@SerializedName("Name")
 	@Expose
@@ -23,11 +27,16 @@ public class Player {
 	@Expose
 	ArrayList<TitleDeed> ownedTitleDeeds=new ArrayList<TitleDeed>();
 	
-	@SerializedName("Owned_Companies")
+	@SerializedName("Owned_Transportation")
 	@Expose
-	ArrayList<Company> ownedCompanies=new ArrayList<Company>();
+	ArrayList<Transportation> ownedTransportation=new ArrayList<Transportation>();
+
+	public Player(String name, double balance) {
+		this.name=name;
+		this.balance=balance;
 
 
+	}
 
 	public int getPosition() {
 		return position;
@@ -37,12 +46,7 @@ public class Player {
 		this.position = position;
 	}
 
-	public Player(String name, double balance) {
-		this.name=name;
-		this.balance=balance;
-
-
-	}
+	
 
 	public void buyProperty(PropertySquare p) {
 		p.performPurchase(this, p);
@@ -64,16 +68,16 @@ public class Player {
 		return this;
 	}
 
-	public ArrayList<Company> getOwnedCompanies() {
-		return ownedCompanies;
+	public ArrayList<Transportation> getOwnedTransportation() {
+		return ownedTransportation;
 	}
 
-	public void setOwnedCompanies(ArrayList<Company> ownedCompanies) {
-		this.ownedCompanies = ownedCompanies;
+	public void setOwnedTransportation(ArrayList<Transportation> ownedTransportation) {
+		this.ownedTransportation = ownedTransportation;
 	}
 
-	public Player withOwnedCompanies(ArrayList<Company> ownedCompanies) {
-		this.ownedCompanies = ownedCompanies;
+	public Player withOwnedTransportation(ArrayList<Transportation> ownedTransportation) {
+		this.ownedTransportation = ownedTransportation;
 		return this;
 	}
 	public void setName(String name) {

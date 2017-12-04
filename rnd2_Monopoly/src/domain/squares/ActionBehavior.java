@@ -1,4 +1,4 @@
-package domain;
+package domain.squares;
 
 public interface ActionBehavior {
 

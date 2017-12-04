@@ -1,23 +1,23 @@
-package domain;
+package domain.squares;
 
-public class Company extends PropertySquare {
-	
-	
-	public Company(String name) {
-		super();
-		this.name = name;
+import domain.MonopolyGameController;
+import domain.Player;
+
+public class TrainStation extends Transportation {
+
+	public TrainStation(String name) {
+		super(name);
+		// TODO Auto-generated constructor stub
 	}
-
-
-
+	
 	@Override
 	public void performPurchase(Player p, PropertySquare s) {
 		// if the owner of the title deed is the bank
 		// (no one owns the title deed), assign the new owner and update balance
 		if (s.getOwner().getName().equals("Bank") && p.getBalance() >= s.getPrice()) {
-			MonopolyGameController.bank.getOwnedCompanies().remove(s);
+			MonopolyGameController.bank.getOwnedTransportation().remove(s);
 			s.setOwner(p);
-			p.getOwnedCompanies().add((Company)s);
+			p.getOwnedTransportation().add((Transportation)s);
 			p.setBalance(p.getBalance() - s.getPrice());
 
 		}
@@ -26,20 +26,17 @@ public class Company extends PropertySquare {
 
 	@Override
 	public Player getOwner() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.owner;
 	}
 
 	@Override
 	public void setOwner(Player owner) {
-		// TODO Auto-generated method stub
-		
+		this.owner=owner;
 	}
 
 	@Override
-	public double getPrice() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getPrice() {
+		return this.price;
 	}
 
 	@Override
@@ -47,13 +44,15 @@ public class Company extends PropertySquare {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
+	@Override
 	public void setName(String name) {
-		this.name = name;
+		this.name=name;
 	}
-
 
 }

@@ -14,6 +14,8 @@ import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 
+import domain.squares.TitleDeed;
+
 
 
 public class MonopolyGameController {

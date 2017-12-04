@@ -1,4 +1,7 @@
-package domain;
+package domain.squares;
+
+import domain.MonopolyGameController;
+import domain.Player;
 
 public class TitleDeed extends PropertySquare {
 	
@@ -61,11 +64,11 @@ public class TitleDeed extends PropertySquare {
 	}
 
 	@Override
-	public double getPrice() {
+	public int getPrice() {
 		// TODO Auto-generated method stub
 		return this.price;
 	}
-	
+
 	public boolean BuildHouse(Player p) {
 		TitleDeed property = null;
 		for(TitleDeed s: p.getOwnedTitleDeeds()) {
