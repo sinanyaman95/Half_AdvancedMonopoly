@@ -7,6 +7,12 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+
+import org.json.simple.parser.ParseException;
+
+import domain.MonopolyGameController;
+import domain.Player;
+
 import javax.swing.JComboBox;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
@@ -52,6 +58,20 @@ public class StartingScreen {
 		
 		btnLoadGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					if(MonopolyGameController.LoadGame()) {
+						frame.setVisible(false);
+						new MonopolyBoard();
+						for(Player p: MonopolyGameController.players) {
+							System.out.println(p.getName());
+						}
+					}
+					
+				} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException
+						| ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		
