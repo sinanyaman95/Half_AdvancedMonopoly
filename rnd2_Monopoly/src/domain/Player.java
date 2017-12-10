@@ -34,10 +34,9 @@ public class Player {
 	public Player(String name, double balance) {
 		this.name=name;
 		this.balance=balance;
-
-
 	}
-
+	public Player() {}
+	
 	public int getPosition() {
 		return position;
 	}

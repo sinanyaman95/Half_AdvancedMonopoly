@@ -34,25 +34,11 @@ public class MonopolyGameController {
 
 	public static ArrayList<Player> players = new ArrayList<Player>();
 
+	
 	public static  Player bank=new Player("Bank", 999999999);
-	public static  Player p1= new Player("Bank", 999999999);
-	public static  Player p2= new Player("Bank", 999999999);
-	public static  Player p3= new Player("Bank", 999999999);
-	public static  Player p4= new Player("Bank", 999999999);
-	public static  Player p5= new Player("Bank", 999999999);
-	public static  Player p6= new Player("Bank", 999999999);
-	public static  Player p7= new Player("Bank", 999999999);
-
 	
 	public static  void initPlayers() {
-		players.add(p1);
-		players.add(p2);
-		players.add(p3);
-		players.add(p4);
-		players.add(p5);
-		players.add(p6);
-		players.add(p7);
-		
+		players.add(bank);
 	}
 
 
@@ -116,7 +102,10 @@ public class MonopolyGameController {
 				for(Player p: player.getPlayers()) {
 					if(p != null) {
 					//System.out.println(p.getName() + " " + p.getBalance() + " " + p.getPosition() + " " + p.getOwnedTitleDeeds().toString());
-					MonopolyGameController.class.getDeclaredField("p"+i).set(instance, p);
+					//MonopolyGameController.class.getDeclaredField("p"+i).set(instance, p);
+					Player temp = new Player();
+					temp = p;
+					players.add(temp);
 					i++;
 					}
 				}
