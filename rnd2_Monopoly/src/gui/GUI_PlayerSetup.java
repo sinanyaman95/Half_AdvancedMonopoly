@@ -27,6 +27,9 @@ public class GUI_PlayerSetup extends JFrame{
 	private int counter = 0; 
 	private int counter2 = 1; 
 	private boolean first=true;
+	
+	
+	//Launches and creates the Player setup window
 	public GUI_PlayerSetup() {
 		initPlayerSetup();
 		setVisible(true);
@@ -62,6 +65,9 @@ public class GUI_PlayerSetup extends JFrame{
 					
 					new_player.setName(textField.getText());
 					new_player.setBalance(1000);
+					new_player.setCheckTurn(true);
+					new_player.setPosition(0);
+					
 					MonopolyGameController.players.add(new_player);
 					textField.setText("");
 					counter--;

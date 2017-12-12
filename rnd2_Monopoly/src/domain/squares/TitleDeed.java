@@ -30,7 +30,11 @@ public class TitleDeed extends PropertySquare {
 		rent=rentVal;
 		mortgageValue=mortgageVal;
 		color=clr;
-		
+		if(owner==null) {
+			buyable = false;
+		}else {
+			buyable = true;
+		}
 		
 		
 	}
@@ -52,7 +56,10 @@ public class TitleDeed extends PropertySquare {
 		
 		
 	}
-
+	public boolean isBuyable() {
+		return buyable;
+	}
+	
 	@Override
 	public Player getOwner() {
 	

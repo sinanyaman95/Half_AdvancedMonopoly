@@ -11,6 +11,10 @@ import domain.squares.TitleDeed;
 import domain.squares.Transportation;
 
 public class Player {
+	@SerializedName("checkTurn")
+	@Expose
+	private boolean checkTurn;
+	
 	@SerializedName("Name")
 	@Expose
 	private String name;
@@ -37,6 +41,13 @@ public class Player {
 	}
 	public Player() {}
 	
+	public boolean isCheckTurn() {
+		return checkTurn;
+	}
+	public void setCheckTurn(boolean checkTurn) {
+		this.checkTurn = checkTurn;
+	}
+	
 	public int getPosition() {
 		return position;
 	}
@@ -50,9 +61,6 @@ public class Player {
 	public void buyProperty(PropertySquare p) {
 		p.performPurchase(this, p);
 	}
-
-
-
 
 	public ArrayList<TitleDeed> getOwnedTitleDeeds() {
 		return ownedTitleDeeds;

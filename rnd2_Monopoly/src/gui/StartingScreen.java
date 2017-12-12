@@ -26,7 +26,7 @@ public class StartingScreen {
 	private JTextField textField;
 	String[] numofPlay = { "2","3","4" };
 	public static int numOfStart;
-
+	public MonopolyBoard  monopolyBoard;
 
 
 	/**
@@ -69,7 +69,8 @@ public class StartingScreen {
 				try {
 					if(MonopolyGameController.LoadGame()) {
 						frame.setVisible(false);
-						new MonopolyBoard();
+						monopolyBoard = new MonopolyBoard();
+						
 						for(Player p: MonopolyGameController.players) {
 							System.out.println(p.getName());
 						}

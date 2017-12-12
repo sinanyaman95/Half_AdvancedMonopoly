@@ -10,6 +10,7 @@ public abstract class PropertySquare extends Square {
 	public int mortgageValue;
 	public Player owner;
 	public boolean mortgageStatus;
+	public boolean buyable;
 	
 	public abstract void performPurchase(Player p, PropertySquare s);
 
