@@ -10,8 +10,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
 import domain.*;
-import domain.squares.TitleDeed;
-import domain.squares.Transportation;
+import domain.squares.propertysquares.TitleDeed;
+import domain.squares.propertysquares.Transportation;
 
 public class PlayerGUI{
 	

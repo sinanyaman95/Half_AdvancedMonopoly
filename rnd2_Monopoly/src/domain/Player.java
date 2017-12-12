@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import domain.squares.PropertySquare;
-import domain.squares.TitleDeed;
-import domain.squares.Transportation;
+import domain.squares.propertysquares.PropertySquare;
+import domain.squares.propertysquares.TitleDeed;
+import domain.squares.propertysquares.Transportation;
 
 public class Player {
 	@SerializedName("checkTurn")

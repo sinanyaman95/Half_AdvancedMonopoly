@@ -17,10 +17,10 @@ import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 
-import domain.squares.PropertySquare;
 import domain.squares.Square;
-import domain.squares.TitleDeed;
-import domain.squares.Transportation;
+import domain.squares.propertysquares.PropertySquare;
+import domain.squares.propertysquares.TitleDeed;
+import domain.squares.propertysquares.Transportation;
 import gui.MonopolyBoard;
 import gui.StartingScreen;
 

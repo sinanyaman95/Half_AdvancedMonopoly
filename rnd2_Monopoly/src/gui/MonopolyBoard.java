@@ -20,8 +20,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import domain.*;
-import domain.squares.PropertySquare;
-import domain.squares.TitleDeed;;
+import domain.squares.propertysquares.PropertySquare;
+import domain.squares.propertysquares.TitleDeed;;
 
 public class MonopolyBoard extends JFrame{
 
