@@ -1,5 +1,7 @@
 package domain;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,14 +17,20 @@ import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 
+import domain.squares.PropertySquare;
+import domain.squares.Square;
 import domain.squares.TitleDeed;
 import domain.squares.Transportation;
+import gui.MonopolyBoard;
+import gui.StartingScreen;
 
 
 
 public class MonopolyGameController {
 	
 	private static MonopolyGameController instance = new MonopolyGameController();
+	
+	private static StartingScreen startingScreen;
 	
 	public static MonopolyGameController getInstance() {
 		return instance;
@@ -34,29 +42,41 @@ public class MonopolyGameController {
 
 	public static ArrayList<Player> players = new ArrayList<Player>();
 
-	public static  Player bank=new Player("Bank", 999999999);
-	public static  Player p1= new Player("Bank", 999999999);
-	public static  Player p2= new Player("Bank", 999999999);
-	public static  Player p3= new Player("Bank", 999999999);
-	public static  Player p4= new Player("Bank", 999999999);
-	public static  Player p5= new Player("Bank", 999999999);
-	public static  Player p6= new Player("Bank", 999999999);
-	public static  Player p7= new Player("Bank", 999999999);
-
+	public static ArrayList<PropertySquare> places = new ArrayList<PropertySquare>();
 	
-	public static  void initPlayers() {
-		players.add(p1);
-		players.add(p2);
-		players.add(p3);
-		players.add(p4);
-		players.add(p5);
-		players.add(p6);
-		players.add(p7);
+	public static  Player bank=new Player("Bank", 999999999);
+	
+	public static RegularDice die1 = new RegularDice();
+	
+	public static RegularDice die2 = new RegularDice();
+	
+	
+	
+	public static void initBoard() {
+		startingScreen = new StartingScreen();
+		
 		
 	}
+	
+	
+	public static  void initPlayers() {
+		//players.add(bank);
+	}
 
-
-
+	public static Player getCurrentPlayer() {
+		for(Player p: players) {
+			if(p.isCheckTurn()) {
+				return p;
+			}
+		}
+		return null;
+		
+	}
+	
+	public static void payRent() {
+		
+	}
+	
 	public static boolean SaveGame() {
 		
 		JSONObject object = new JSONObject();
@@ -76,6 +96,7 @@ public class MonopolyGameController {
 			player.put("Owned_Title_Deeds",ownedDeeds);
 			player.put("Owned_Transportation", ownedCompanies);
 			player.put("Position", p.getPosition());
+			player.put("checkTurn", p.isCheckTurn());
 			players_array.add(player);
 		}
 		object.put("players", players_array);
@@ -107,16 +128,15 @@ public class MonopolyGameController {
 		Gson gs = new Gson();
 		BufferedReader br = null;
 		try {
-			//br = new BufferedReader(new FileReader("C:\\Users\\umur1\\Desktop\\MonopolySaveJSON.json"));
-			//URL path = this.getClass().getResource("/pics/MonopolySaveJSON.json");
 			br = new BufferedReader(new FileReader(new File("GameSaveFiles/MonopolySaveJSON3.json")));
 			PlayerMapper player = gs.fromJson(br, PlayerMapper.class);
 			if(player != null) {
 				int i=1;
 				for(Player p: player.getPlayers()) {
 					if(p != null) {
-					//System.out.println(p.getName() + " " + p.getBalance() + " " + p.getPosition() + " " + p.getOwnedTitleDeeds().toString());
-					MonopolyGameController.class.getDeclaredField("p"+i).set(instance, p);
+					Player temp;
+					temp = p;
+					players.add(temp);
 					i++;
 					}
 				}
