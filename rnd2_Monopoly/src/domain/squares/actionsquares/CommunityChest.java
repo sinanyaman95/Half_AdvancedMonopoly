@@ -1,19 +1,20 @@
 package domain.squares.actionsquares;
 
+import java.util.ArrayList;
+
+import domain.CommunityChestCard;
 import domain.Player;
 
-public class GoToJail extends ActionSquare {
+public class CommunityChest extends ActionSquare {
 
-	public GoToJail(int index) {
+	public CommunityChest(int index, ArrayList<CommunityChestCard> communityDeck) {
 		super(index);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void landedOn(Player p) {
-		//sends the player to jail
-		p.setPosition(10);
-		p.setInJail(true);
+		// TODO Auto-generated method stub
 
 	}
 

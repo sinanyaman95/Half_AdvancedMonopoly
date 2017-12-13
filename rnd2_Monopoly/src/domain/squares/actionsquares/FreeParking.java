@@ -1,16 +1,24 @@
 package domain.squares.actionsquares;
 
+import domain.Player;
+
 public class FreeParking extends ActionSquare {
 
-	public FreeParking(String name) {
-		super(name);
+	public FreeParking(int index) {
+		super(index);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void landedOn() {
-		// TODO Auto-generated method stub
+	public void landedOn(Player p) {
+		p.setBalance(p.getBalance()+100);
 
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

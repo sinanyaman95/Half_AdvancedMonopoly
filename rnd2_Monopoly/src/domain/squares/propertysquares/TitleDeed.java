@@ -1,16 +1,21 @@
 package domain.squares.propertysquares;
 
+import java.util.ArrayList;
+
 import domain.MonopolyGameController;
 import domain.Player;
+import domain.squares.BuyableBehavior;
+import domain.squares.canBuy;
+import domain.squares.notBuy;
 
 public class TitleDeed extends PropertySquare {
 	
-	/*
-	public int price;
-	public int rent;
-	public int mortgageValue;
-	public Player owner;
-	*/
+
+	public String color;
+	public int index;
+	public int zeroRent;
+	public ArrayList<Integer> rent;
+	public int buildingPrice;
 	
 	
 	public boolean twoColorDeed;
@@ -19,21 +24,29 @@ public class TitleDeed extends PropertySquare {
 	public int numberOfHotels;
 	public int numberOfSkyscrapers;
 	
-
 	//////////////////////////////////////////////////////////////////////////////////////////////
-	public TitleDeed(String tname,int priceVal,int rentVal,int mortgageVal,String clr) {
-		//update
+	public TitleDeed(int index,String name,String color,int price,int zeroRent,int mortgageVal,int numberOfHouses, 
+			int numberOfHotels, int numberOfSkyscrapers, int buildingPrice) {
+		
 		super();
-		name=tname;
-		owner=MonopolyGameController.bank;
-		price=priceVal;
-		rent=rentVal;
-		mortgageValue=mortgageVal;
-		color=clr;
-		if(owner==null) {
-			buyable = false;
+		this.index=index;
+		this.name=name;
+		this.color=color;
+		this.price=price;
+		this.zeroRent=zeroRent;
+		this.mortgageValue=mortgageVal;
+		this.numberOfHouses = numberOfHouses;
+		this.numberOfHotels = numberOfHotels;
+		this.numberOfSkyscrapers = numberOfSkyscrapers;
+		this.rent = new ArrayList<Integer>();
+		this.mortgageStatus=false;
+		
+		//We'll discuss this part, it might cause bugs.
+		// Do we need buyable field since it is property square for sure??
+		if(owner==MonopolyGameController.bank) {
+			buyable = new notBuy();
 		}else {
-			buyable = true;
+			buyable = new canBuy();
 		}
 		
 		
@@ -56,7 +69,7 @@ public class TitleDeed extends PropertySquare {
 		
 		
 	}
-	public boolean isBuyable() {
+	public BuyableBehavior isBuyable() {
 		return buyable;
 	}
 	
@@ -74,7 +87,7 @@ public class TitleDeed extends PropertySquare {
 
 	@Override
 	public int getPrice() {
-		// TODO Auto-generated method stub
+
 		return this.price;
 	}
 
@@ -199,11 +212,11 @@ public class TitleDeed extends PropertySquare {
 		this.name = name;
 	}
 
-	public int getRent() {
+	public ArrayList<Integer> getRent() {
 		return rent;
 	}
 
-	public void setRent(int rent) {
+	public void setRent(ArrayList<Integer> rent) {
 		this.rent = rent;
 	}
 
@@ -243,12 +256,29 @@ public class TitleDeed extends PropertySquare {
 		this.price = price;
 	}
 
+	
+	public void addTaxList (int oneHouse, int twoHouse, int threeHouse, int fourHouse, int hotel, int skyScraper) {
+		this.rent.add(oneHouse);
+		this.rent.add(twoHouse);
+		this.rent.add(threeHouse);
+		this.rent.add(fourHouse);
+		this.rent.add(hotel);
+		this.rent.add(skyScraper);
+		
+			
+	}
+
 	@Override
-	public void landedOn() {
+	public boolean getMortgageStatus() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setMortgageStatus(boolean mortgageStatus) {
 		// TODO Auto-generated method stub
 		
 	}
-
 
 
 }

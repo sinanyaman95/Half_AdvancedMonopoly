@@ -1,16 +1,24 @@
 package domain.squares.actionsquares;
 
-public class Auction extends ActionSquare {
+import domain.Player;
 
-	public Auction(String name) {
-		super(name);
+public class Auction extends ActionSquare{
+
+	public Auction(int index) {
+		super(index);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void landedOn() {
+	public void landedOn(Player p) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

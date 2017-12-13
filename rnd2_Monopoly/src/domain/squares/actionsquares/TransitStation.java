@@ -2,18 +2,16 @@ package domain.squares.actionsquares;
 
 import domain.Player;
 
-public class GoToJail extends ActionSquare {
+public class TransitStation extends ActionSquare {
 
-	public GoToJail(int index) {
+	public TransitStation(int index, int i, String string) {
 		super(index);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void landedOn(Player p) {
-		//sends the player to jail
-		p.setPosition(10);
-		p.setInJail(true);
+		// TODO Auto-generated method stub
 
 	}
 

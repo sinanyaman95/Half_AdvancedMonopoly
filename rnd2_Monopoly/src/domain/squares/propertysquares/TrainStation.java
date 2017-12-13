@@ -56,9 +56,16 @@ public class TrainStation extends Transportation {
 	}
 
 	@Override
-	public void landedOn() {
+	public boolean getMortgageStatus() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setMortgageStatus(boolean mortgageStatus) {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

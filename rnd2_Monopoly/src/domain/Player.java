@@ -35,6 +35,8 @@ public class Player {
 	@Expose
 	ArrayList<Transportation> ownedTransportation=new ArrayList<Transportation>();
 
+	public boolean isInJail=false;
+	
 	public Player(String name, double balance) {
 		this.name=name;
 		this.balance=balance;
@@ -48,6 +50,12 @@ public class Player {
 		this.checkTurn = checkTurn;
 	}
 	
+	public boolean isInJail() {
+		return isInJail;
+	}
+	public void setInJail(boolean isInJail) {
+		this.isInJail = isInJail;
+	}
 	public int getPosition() {
 		return position;
 	}
