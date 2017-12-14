@@ -8,6 +8,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import domain.MonopolyGameController;
+import domain.squares.propertysquares.TitleDeed;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +31,7 @@ public class PayRent_PopUp_Window extends JDialog {
 	private JLabel lblRemainingBalance_label;
 	private JLabel lblPropertyname;
 	private JLabel lblOwner_label;
+	private TitleDeed rent_deed;
 	public boolean success = false;
 	
 	public PayRent_PopUp_Window() {
@@ -100,6 +105,7 @@ public class PayRent_PopUp_Window extends JDialog {
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
+				
 				okButton.addActionListener(new ActionListener() {
 					
 					@Override
@@ -110,8 +116,8 @@ public class PayRent_PopUp_Window extends JDialog {
 							JOptionPane.showMessageDialog(null, "Game Over! \nYou are bankrupted!!!");
 							
 						}else {
-							success = true;
-							
+							MonopolyGameController.payRent(rent_deed,rent_deed.calculateRent());
+							setVisible(false);
 						}
 					}
 				});
@@ -133,5 +139,11 @@ public class PayRent_PopUp_Window extends JDialog {
 	}
 	public void setOwner(String name) {
 		lblOwner_label.setText(name);
+	}
+	public boolean isSucceed() {
+		return this.success;
+	}
+	public void setRentDeed(TitleDeed deed) {
+		this.rent_deed=deed;
 	}
 }

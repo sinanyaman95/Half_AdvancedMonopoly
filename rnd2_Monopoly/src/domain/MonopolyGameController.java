@@ -429,9 +429,10 @@ public class MonopolyGameController {
 		
 	}
 	
-	public static void payRent(double rentAmount) {
+	public static void payRent(TitleDeed deed,double rentAmount) {
 		double currentBalance = getCurrentPlayer().getBalance();
 		getCurrentPlayer().setBalance(currentBalance-rentAmount);
+		deed.getOwner().setBalance(deed.getOwner().getBalance()+rentAmount);
 	}
 	
 	public static boolean SaveGame() {
