@@ -5,7 +5,6 @@ import domain.squares.Square;
 import domain.squares.canBuy;
 
 public abstract class PropertySquare extends Square {
-	public String name;
 	public String color;
 	public int price;
 	public int rent;
@@ -22,7 +21,7 @@ public abstract class PropertySquare extends Square {
 
 	public abstract Player getOwner();
 
-	public abstract void calculateRent();
+	public abstract double calculateRent();
 
 	public abstract void setOwner(Player owner);
 

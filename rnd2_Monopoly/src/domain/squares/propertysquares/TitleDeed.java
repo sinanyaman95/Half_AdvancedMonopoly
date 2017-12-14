@@ -11,12 +11,11 @@ import domain.squares.notBuy;
 public class TitleDeed extends PropertySquare {
 	
 
-	public String color;
-	public int index;
-	public int zeroRent;
-	public ArrayList<Integer> rent;
-	public int buildingPrice;
 	
+	public int index;
+	public double zeroRent;
+	public ArrayList<Double> titled_rent;
+	public int buildingPrice;
 	
 	public boolean twoColorDeed;
 	public boolean threeColorDeed;
@@ -30,7 +29,7 @@ public class TitleDeed extends PropertySquare {
 		
 		super();
 		this.index=index;
-		this.name=name;
+		this.name = name;
 		this.color=color;
 		this.price=price;
 		this.zeroRent=zeroRent;
@@ -38,7 +37,7 @@ public class TitleDeed extends PropertySquare {
 		this.numberOfHouses = numberOfHouses;
 		this.numberOfHotels = numberOfHotels;
 		this.numberOfSkyscrapers = numberOfSkyscrapers;
-		this.rent = new ArrayList<Integer>();
+		this.titled_rent = new ArrayList<Double>();
 		this.mortgageStatus=false;
 		
 		//We'll discuss this part, it might cause bugs.
@@ -58,7 +57,7 @@ public class TitleDeed extends PropertySquare {
 
 			// if the owner of the title deed is the bank
 			// (no one owns the title deed), assign the new owner and update balance
-			if (s.getOwner().getName().equals("Bank") && p.getBalance() >= s.getPrice()) {
+			if (/*s.getOwner().getName().equals("Bank") && */p.getBalance() >= s.getPrice()) {
 				MonopolyGameController.bank.getOwnedTitleDeeds().remove(s);
 				s.setOwner(p);
 				p.getOwnedTitleDeeds().add((TitleDeed)s);
@@ -198,9 +197,13 @@ public class TitleDeed extends PropertySquare {
 	}
 
 	@Override
-	public void calculateRent() {
+	public double calculateRent() {
 		// TODO Auto-generated method stub
-		
+		if(this.numberOfHouses == 0) {
+			return this.zeroRent;
+		}else {
+			return this.titled_rent.get((numberOfHouses + numberOfHotels + numberOfSkyscrapers) - 1);
+		}
 	}
 
 	
@@ -212,12 +215,12 @@ public class TitleDeed extends PropertySquare {
 		this.name = name;
 	}
 
-	public ArrayList<Integer> getRent() {
-		return rent;
+	public ArrayList<Double> getRent() {
+		return titled_rent;
 	}
 
-	public void setRent(ArrayList<Integer> rent) {
-		this.rent = rent;
+	public void setRent(ArrayList<Double> rent) {
+		this.titled_rent = rent;
 	}
 
 	public int getMortgageValue() {
@@ -257,13 +260,13 @@ public class TitleDeed extends PropertySquare {
 	}
 
 	
-	public void addTaxList (int oneHouse, int twoHouse, int threeHouse, int fourHouse, int hotel, int skyScraper) {
-		this.rent.add(oneHouse);
-		this.rent.add(twoHouse);
-		this.rent.add(threeHouse);
-		this.rent.add(fourHouse);
-		this.rent.add(hotel);
-		this.rent.add(skyScraper);
+	public void addTaxList (double oneHouse, double twoHouse, double threeHouse, double fourHouse, double hotel, double skyScraper) {
+		this.titled_rent.add(oneHouse);
+		this.titled_rent.add(twoHouse);
+		this.titled_rent.add(threeHouse);
+		this.titled_rent.add(fourHouse);
+		this.titled_rent.add(hotel);
+		this.titled_rent.add(skyScraper);
 		
 			
 	}

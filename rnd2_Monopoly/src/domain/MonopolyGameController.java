@@ -429,8 +429,9 @@ public class MonopolyGameController {
 		
 	}
 	
-	public static void payRent() {
-		
+	public static void payRent(double rentAmount) {
+		double currentBalance = getCurrentPlayer().getBalance();
+		getCurrentPlayer().setBalance(currentBalance-rentAmount);
 	}
 	
 	public static boolean SaveGame() {
@@ -442,10 +443,10 @@ public class MonopolyGameController {
 			JSONArray ownedDeeds = new JSONArray();
 			JSONArray ownedCompanies = new JSONArray();
 			for(TitleDeed t: p.getOwnedTitleDeeds()) {
-				ownedDeeds.add(t.getName());
+				ownedDeeds.add(t);
 			}
 			for(Transportation c: p.ownedTransportation) {
-				ownedCompanies.add(c.getName());
+				ownedCompanies.add(c);
 			}
 			player.put("Name", p.getName());
 			player.put("Balance", p.getBalance());
@@ -453,6 +454,7 @@ public class MonopolyGameController {
 			player.put("Owned_Transportation", ownedCompanies);
 			player.put("Position", p.getPosition());
 			player.put("checkTurn", p.isCheckTurn());
+			player.put("isInJail", p.isInJail());
 			players_array.add(player);
 		}
 		object.put("players", players_array);

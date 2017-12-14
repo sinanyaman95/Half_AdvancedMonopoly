@@ -31,15 +31,19 @@ public class Player {
 	@Expose
 	ArrayList<TitleDeed> ownedTitleDeeds=new ArrayList<TitleDeed>();
 	
+	
 	@SerializedName("Owned_Transportation")
 	@Expose
 	ArrayList<Transportation> ownedTransportation=new ArrayList<Transportation>();
 
-	public boolean isInJail=false;
+	@SerializedName("isInJail")
+	@Expose
+	private boolean isInJail;
 	
 	public Player(String name, double balance) {
 		this.name=name;
 		this.balance=balance;
+		setInJail(false);
 	}
 	public Player() {}
 	
