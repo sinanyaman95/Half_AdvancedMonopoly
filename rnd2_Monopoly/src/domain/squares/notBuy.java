@@ -6,4 +6,9 @@ public class notBuy implements BuyableBehavior{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean getBuyableType() {
+		return false;
+	}
 }

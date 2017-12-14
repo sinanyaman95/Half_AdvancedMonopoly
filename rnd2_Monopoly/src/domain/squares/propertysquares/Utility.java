@@ -36,9 +36,9 @@ public class Utility extends PropertySquare {
 	}
 
 	@Override
-	public void calculateRent() {
+	public double calculateRent() {
+		return rent;
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override

@@ -17,6 +17,8 @@ import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 
+import domain.cards.ChanceCard;
+import domain.cards.CommunityChestCard;
 import domain.squares.Square;
 import domain.squares.actionsquares.*;
 import domain.squares.propertysquares.*;
@@ -429,8 +431,10 @@ public class MonopolyGameController {
 		
 	}
 	
-	public static void payRent() {
-		
+	public static void payRent(TitleDeed deed,double rentAmount) {
+		double currentBalance = getCurrentPlayer().getBalance();
+		getCurrentPlayer().setBalance(currentBalance-rentAmount);
+		deed.getOwner().setBalance(deed.getOwner().getBalance()+rentAmount);
 	}
 	
 	public static boolean SaveGame() {
@@ -442,10 +446,10 @@ public class MonopolyGameController {
 			JSONArray ownedDeeds = new JSONArray();
 			JSONArray ownedCompanies = new JSONArray();
 			for(TitleDeed t: p.getOwnedTitleDeeds()) {
-				ownedDeeds.add(t.getName());
+				ownedDeeds.add(t);
 			}
 			for(Transportation c: p.ownedTransportation) {
-				ownedCompanies.add(c.getName());
+				ownedCompanies.add(c);
 			}
 			player.put("Name", p.getName());
 			player.put("Balance", p.getBalance());
@@ -453,6 +457,7 @@ public class MonopolyGameController {
 			player.put("Owned_Transportation", ownedCompanies);
 			player.put("Position", p.getPosition());
 			player.put("checkTurn", p.isCheckTurn());
+			player.put("isInJail", p.isInJail());
 			players_array.add(player);
 		}
 		object.put("players", players_array);

@@ -2,8 +2,9 @@ package domain.squares.actionsquares;
 
 import java.util.ArrayList;
 
-import domain.CommunityChestCard;
+
 import domain.Player;
+import domain.cards.CommunityChestCard;
 
 public class CommunityChest extends ActionSquare {
 

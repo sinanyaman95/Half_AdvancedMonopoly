@@ -11,12 +11,11 @@ import domain.squares.notBuy;
 public class TitleDeed extends PropertySquare {
 	
 
-	public String color;
-	public int index;
-	public int zeroRent;
-	public ArrayList<Integer> rent;
-	public int buildingPrice;
 	
+	public int index;
+	public double zeroRent;
+	public ArrayList<Double> titled_rent;
+	public int buildingPrice;
 	
 	public boolean twoColorDeed;
 	public boolean threeColorDeed;
@@ -30,7 +29,7 @@ public class TitleDeed extends PropertySquare {
 		
 		super();
 		this.index=index;
-		this.name=name;
+		this.name = name;
 		this.color=color;
 		this.price=price;
 		this.zeroRent=zeroRent;
@@ -38,36 +37,29 @@ public class TitleDeed extends PropertySquare {
 		this.numberOfHouses = numberOfHouses;
 		this.numberOfHotels = numberOfHotels;
 		this.numberOfSkyscrapers = numberOfSkyscrapers;
-		this.rent = new ArrayList<Integer>();
+		this.titled_rent = new ArrayList<Double>();
 		this.mortgageStatus=false;
 		
 		//We'll discuss this part, it might cause bugs.
 		// Do we need buyable field since it is property square for sure??
-		if(owner==MonopolyGameController.bank) {
+		/*if(owner==MonopolyGameController.bank) {
 			buyable = new notBuy();
 		}else {
 			buyable = new canBuy();
-		}
-		
-		
+		}*/
 	}
 
 	@Override
 	public void performPurchase(Player p,PropertySquare s) {
-		
-
 			// if the owner of the title deed is the bank
 			// (no one owns the title deed), assign the new owner and update balance
-			if (s.getOwner().getName().equals("Bank") && p.getBalance() >= s.getPrice()) {
+			if (/*s.getOwner().getName().equals("Bank") && */p.getBalance() >= s.getPrice()) {
 				MonopolyGameController.bank.getOwnedTitleDeeds().remove(s);
 				s.setOwner(p);
 				p.getOwnedTitleDeeds().add((TitleDeed)s);
 				p.setBalance(p.getBalance() - s.getPrice());
 
 			}
-
-		
-		
 	}
 	public BuyableBehavior isBuyable() {
 		return buyable;
@@ -89,82 +81,6 @@ public class TitleDeed extends PropertySquare {
 	public int getPrice() {
 
 		return this.price;
-	}
-
-	public boolean BuildHouse(Player p) {
-		TitleDeed property = null;
-		for(TitleDeed s: p.getOwnedTitleDeeds()) {
-			if(s.name.equals(this.name)) {
-				property = s;
-			}else {
-				return false;
-			}
-		}
-		if(isMajorityOwner(property)) {
-			(property).increaseNumberOfHouses();	
-			return true;
-		}
-		return false;
-	}
-
-	public boolean BuildHotel(Player p) {
-		TitleDeed property = null;
-		for(TitleDeed s: p.getOwnedTitleDeeds()) {
-			if(s.name.equals(this.name)) {
-				property = s;
-			}else {
-				return false;
-			}
-		}
-		if(isMajorityOwner(property)) {
-			(property).increaseNumberOfHotels();	
-			return true;
-		}
-		return false;
-	}
-
-	public boolean BuildSkyscraper(Player p) {
-		TitleDeed property = null;
-		for(TitleDeed s: p.getOwnedTitleDeeds()) {
-			if(s.name.equals(this.name)) {
-				property = s;
-			}else {
-				return false;
-			}
-		}
-		if(isMonopoly(property,p)) {
-			(property).setNumberOfSkyscrapers(1);
-			return true;
-		}
-		return false;
-
-	}
-
-	public boolean isMajorityOwner(PropertySquare property){
-		return false;
-
-	}
-	public boolean isMonopoly(TitleDeed property,Player p){
-		int color_count = 1; 
-		boolean hasHotel = false;
-		for(TitleDeed s: p.getOwnedTitleDeeds()) {
-			if(s.color.equals(property.color)) {
-				color_count ++;
-				if((s).getNumberOfHotels() != 0) {
-					hasHotel = true;
-				}else {
-					hasHotel = false;
-				}
-			}
-		}
-		if(hasHotel) {
-			if(color_count == 3 && property.threeColorDeed) {
-				return true;
-			}else if(color_count == 2 && property.twoColorDeed) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public void increaseNumberOfHouses() {
@@ -198,9 +114,13 @@ public class TitleDeed extends PropertySquare {
 	}
 
 	@Override
-	public void calculateRent() {
+	public double calculateRent() {
 		// TODO Auto-generated method stub
-		
+		if(this.numberOfHouses == 0) {
+			return this.zeroRent;
+		}else {
+			return this.titled_rent.get((numberOfHouses + numberOfHotels + numberOfSkyscrapers) - 1);
+		}
 	}
 
 	
@@ -212,12 +132,12 @@ public class TitleDeed extends PropertySquare {
 		this.name = name;
 	}
 
-	public ArrayList<Integer> getRent() {
-		return rent;
+	public ArrayList<Double> getRent() {
+		return titled_rent;
 	}
 
-	public void setRent(ArrayList<Integer> rent) {
-		this.rent = rent;
+	public void setRent(ArrayList<Double> rent) {
+		this.titled_rent = rent;
 	}
 
 	public int getMortgageValue() {
@@ -256,14 +176,23 @@ public class TitleDeed extends PropertySquare {
 		this.price = price;
 	}
 
-	
-	public void addTaxList (int oneHouse, int twoHouse, int threeHouse, int fourHouse, int hotel, int skyScraper) {
-		this.rent.add(oneHouse);
-		this.rent.add(twoHouse);
-		this.rent.add(threeHouse);
-		this.rent.add(fourHouse);
-		this.rent.add(hotel);
-		this.rent.add(skyScraper);
+	/**
+	 * @param oneHouse
+	 * @param twoHouse
+	 * @param threeHouse
+	 * @param fourHouse
+	 * @param hotel
+	 * @param skyScraper
+	 * @effects receives a tax list of 6 integers and creates the rent prices for title deeds.
+	 * @modifies this.rent
+	 */
+	public void addTaxList (double oneHouse, double twoHouse, double threeHouse, double fourHouse, double hotel, double skyScraper) {
+		this.titled_rent.add(oneHouse);
+		this.titled_rent.add(twoHouse);
+		this.titled_rent.add(threeHouse);
+		this.titled_rent.add(fourHouse);
+		this.titled_rent.add(hotel);
+		this.titled_rent.add(skyScraper);
 		
 			
 	}
