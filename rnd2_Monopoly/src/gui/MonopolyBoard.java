@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,8 +21,10 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import domain.*;
-import domain.squares.PropertySquare;
-import domain.squares.TitleDeed;;
+import domain.squares.Square;
+import domain.squares.propertysquares.PropertySquare;
+import domain.squares.propertysquares.TitleDeed;
+import domain.squares.propertysquares.Transportation;;
 
 public class MonopolyBoard extends JFrame{
 
@@ -39,8 +42,6 @@ public class MonopolyBoard extends JFrame{
 	public JLabel lblFaceVal2_label;
 	public JLabel lblCurrentPosition;
 	public JLabel lblCurrentPosition_label;
-	public JLabel lblTargetPosition;
-	public JLabel lblTargetPosition_label;
 	public JButton btnEndTurn;
 	public JPanel buy_panel;
 	public JLabel lblBuyable;
@@ -49,11 +50,26 @@ public class MonopolyBoard extends JFrame{
 	public JButton btnSaveGame;
 	public JButton btnNewGame;
 	public JButton btnExit;
+	public JLabel lblTotalMove_label;
+	public JLabel lblBuyable_property_name;
+	public JLabel lblBuyable_price_label;
+
+	private int position = 0;
+	private Square prop;
+	private Player current;
+	private boolean first_roll =true;
+	private int player_count = 1;
+
+	private ArrayList<PlayerGUI> player_guis;
 
 	public MonopolyBoard() {
+		player_guis = new ArrayList<PlayerGUI>();
+		
 		initialize();
 		setVisible(true);
-		
+		lblTurn_label.setText(current.getName());
+		btnEndTurn.setEnabled(false);
+		resetLabels();
 	}
 
 	private void initialize() {
@@ -90,15 +106,16 @@ public class MonopolyBoard extends JFrame{
 		gameplay_panel.setLayout(null);
 		
 		lblTurn = new JLabel("Turn :");
+		lblTurn.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTurn.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblTurn.setForeground(new Color(255, 255, 255));
-		lblTurn.setBounds(76, 60, 46, 14);
+		lblTurn.setBounds(76, 60, 46, 23);
 		gameplay_panel.add(lblTurn);
 		
 		lblTurn_label = new JLabel("New label");
 		lblTurn_label.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblTurn_label.setForeground(Color.WHITE);
-		lblTurn_label.setBounds(132, 60, 76, 14);
+		lblTurn_label.setBounds(132, 60, 177, 23);
 		gameplay_panel.add(lblTurn_label);
 		
 		btnRoll = new JButton("Roll");
@@ -112,7 +129,7 @@ public class MonopolyBoard extends JFrame{
 		lblFaceVal1.setBounds(387, 98, 127, 14);
 		gameplay_panel.add(lblFaceVal1);
 		
-		lblFaceVal1_label = new JLabel("0");
+		lblFaceVal1_label = new JLabel("New label");
 		lblFaceVal1_label.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblFaceVal1_label.setForeground(Color.WHITE);
 		lblFaceVal1_label.setBounds(512, 98, 66, 14);
@@ -124,25 +141,14 @@ public class MonopolyBoard extends JFrame{
 		lblFaceVal2.setBounds(387, 133, 127, 14);
 		gameplay_panel.add(lblFaceVal2);
 		
-		lblFaceVal2_label = new JLabel("0");
+		lblFaceVal2_label = new JLabel("New label");
 		lblFaceVal2_label.setForeground(Color.WHITE);
 		lblFaceVal2_label.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblFaceVal2_label.setBounds(512, 133, 66, 14);
 		gameplay_panel.add(lblFaceVal2_label);
 		
-		JLabel lblTotalMove = new JLabel("Total Move :");
-		lblTotalMove.setForeground(Color.WHITE);
-		lblTotalMove.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTotalMove.setBounds(387, 167, 127, 14);
-		gameplay_panel.add(lblTotalMove);
-		
-		JLabel lblTotalMove_label = new JLabel("0");
-		lblTotalMove_label.setForeground(Color.WHITE);
-		lblTotalMove_label.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTotalMove_label.setBounds(512, 167, 66, 14);
-		gameplay_panel.add(lblTotalMove_label);
-		
-		lblCurrentPosition = new JLabel("Current Position :");
+		lblCurrentPosition = new JLabel("Landed on :");
+		lblCurrentPosition.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCurrentPosition.setForeground(Color.WHITE);
 		lblCurrentPosition.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblCurrentPosition.setBounds(0, 98, 127, 23);
@@ -151,20 +157,8 @@ public class MonopolyBoard extends JFrame{
 		lblCurrentPosition_label = new JLabel("New label");
 		lblCurrentPosition_label.setForeground(Color.WHITE);
 		lblCurrentPosition_label.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblCurrentPosition_label.setBounds(132, 98, 76, 23);
+		lblCurrentPosition_label.setBounds(132, 98, 177, 23);
 		gameplay_panel.add(lblCurrentPosition_label);
-		
-		lblTargetPosition = new JLabel("Target Position :");
-		lblTargetPosition.setForeground(Color.WHITE);
-		lblTargetPosition.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTargetPosition.setBounds(0, 133, 127, 23);
-		gameplay_panel.add(lblTargetPosition);
-		
-		lblTargetPosition_label = new JLabel("New label");
-		lblTargetPosition_label.setForeground(Color.WHITE);
-		lblTargetPosition_label.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTargetPosition_label.setBounds(132, 133, 76, 23);
-		gameplay_panel.add(lblTargetPosition_label);
 		
 		btnEndTurn = new JButton("End Turn");
 		btnEndTurn.setForeground(Color.BLACK);
@@ -182,23 +176,53 @@ public class MonopolyBoard extends JFrame{
 		
 		lblBuyable = new JLabel("Buyable !!!");
 		lblBuyable.setBackground(Color.BLACK);
-		lblBuyable.setBounds(58, 41, 74, 17);
+		lblBuyable.setBounds(58, 11, 74, 17);
 		buy_panel.add(lblBuyable);
 		lblBuyable.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBuyable.setForeground(Color.WHITE);
 		lblBuyable.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		btnBuy = new JButton("Buy");
-		btnBuy.setBounds(58, 74, 74, 25);
+		btnBuy.setBounds(58, 96, 74, 25);
 		buy_panel.add(btnBuy);
 		btnBuy.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
-		lblNewLabel_3 = new JLabel("New label");
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3.setForeground(Color.WHITE);
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_3.setBounds(32, 11, 132, 19);
-		buy_panel.add(lblNewLabel_3);
+		lblBuyable_property_name = new JLabel("New label");
+		lblBuyable_property_name.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBuyable_property_name.setForeground(Color.WHITE);
+		lblBuyable_property_name.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblBuyable_property_name.setBounds(27, 39, 132, 19);
+		buy_panel.add(lblBuyable_property_name);
+		
+		lblBuyable_price_label = new JLabel("New label");
+		lblBuyable_price_label.setForeground(Color.WHITE);
+		lblBuyable_price_label.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblBuyable_price_label.setBounds(58, 68, 74, 17);
+		buy_panel.add(lblBuyable_price_label);
+		
+		JLabel lblTotalMove = new JLabel("Total Move :");
+		lblTotalMove.setForeground(Color.WHITE);
+		lblTotalMove.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTotalMove.setBounds(387, 167, 127, 14);
+		gameplay_panel.add(lblTotalMove);
+		
+		lblTotalMove_label = new JLabel("0");
+		lblTotalMove_label.setForeground(Color.WHITE);
+		lblTotalMove_label.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTotalMove_label.setBounds(512, 167, 66, 14);
+		gameplay_panel.add(lblTotalMove_label);
+		
+		btnSaveGame = new JButton("Save Game");
+		btnSaveGame.setBounds(1744, 35, 139, 23);
+		getContentPane().add(btnSaveGame);
+		
+		btnNewGame = new JButton("New Game");
+		btnNewGame.setBounds(1744, 69, 139, 23);
+		getContentPane().add(btnNewGame);
+		
+		btnExit = new JButton("Exit");
+		btnExit.setBounds(1744, 103, 139, 23);
+		getContentPane().add(btnExit);
 		
 		JPanel panel_Bank = new JPanel();
 		panel_Bank.setBackground(new Color(65, 105, 225));
@@ -216,7 +240,7 @@ public class MonopolyBoard extends JFrame{
 		JLabel lblBankBalance = new JLabel("Balance :");
 		lblBankBalance.setForeground(new Color(255, 255, 255));
 		lblBankBalance.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblBankBalance.setBounds(21, 44, 71, 14);
+		lblBankBalance.setBounds(21, 37, 71, 14);
 		panel_Bank.add(lblBankBalance);
 		
 		JLabel lblBankBalance_label = new JLabel("0");
@@ -224,38 +248,13 @@ public class MonopolyBoard extends JFrame{
 		lblBankBalance_label.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblBankBalance_label.setBounds(21, 62, 123, 14);
 		panel_Bank.add(lblBankBalance_label);
-		
-		lblBankBalance_label.setText(MonopolyGameController.bank.getBalance()+" $");
-		
-		btnSaveGame = new JButton("Save Game");
-		btnSaveGame.setBounds(1744, 35, 139, 23);
-		getContentPane().add(btnSaveGame);
-		
-		btnNewGame = new JButton("New Game");
-		btnNewGame.setBounds(1744, 69, 139, 23);
-		getContentPane().add(btnNewGame);
-		
-		btnExit = new JButton("Exit");
-		btnExit.setBounds(1744, 103, 139, 23);
-		getContentPane().add(btnExit);
 
-		Player current =MonopolyGameController.getCurrentPlayer();
-		int position = current.getPosition();
-		/*
-		PropertySquare prop = MonopolyGameController.places.get(position);
-		if(prop.getOwner()!=current) {
-			PayRent_PopUp_Window payrentPopUp = new PayRent_PopUp_Window();
-			payrentPopUp.setCurrentBalance(MonopolyGameController.getCurrentPlayer().getBalance());
-			payrentPopUp.setRentAmount(MonopolyGameController.places.get(MonopolyGameController.getCurrentPlayer().getPosition()).rent);
-			payrentPopUp.calculateRemaining();
-			payrentPopUp.show();
-			if(payrentPopUp.success) {
-				MonopolyGameController.payRent();
-			}
-		}
-		*/
+		current =MonopolyGameController.getCurrentPlayer();
+		position = current.getPosition();
+		prop = MonopolyGameController.squareList[position];
+
 		btnRoll.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -266,6 +265,30 @@ public class MonopolyBoard extends JFrame{
 				lblFaceVal1_label.setText(MonopolyGameController.die1.getFaceValue());
 				lblFaceVal2_label.setText(MonopolyGameController.die2.getFaceValue());
 				lblTotalMove_label.setText(""+(die1+die2));
+				current.setPosition(position+(die1+die2));
+				position = current.getPosition();
+				prop = MonopolyGameController.squareList[position];
+				
+				lblCurrentPosition_label.setText(MonopolyGameController.squareList[position].getName());
+				//System.out.println(position);
+				//System.out.println(MonopolyGameController.squareList[position].getClass().toString());
+				first_roll=false;
+				updateGui();
+				btnEndTurn.setEnabled(true);
+			}
+		});
+
+		btnBuy.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				if(MonopolyGameController.squareList[position].getBuyable().getBuyableType()) {
+					current.buyProperty((TitleDeed) MonopolyGameController.squareList[position]);
+				
+					updateGui();
+					buy_panel.setVisible(false);
+				}
 			}
 		});
 
@@ -298,19 +321,101 @@ public class MonopolyBoard extends JFrame{
 				System.exit(0);
 			}
 		});
+
+		btnEndTurn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				if(player_count == MonopolyGameController.players.size()) {
+					player_count=0;
+				}
+				player_count ++;
+				first_roll = true;
+				current = MonopolyGameController.players.get(player_count-1);
+				position = current.getPosition();
+				prop = MonopolyGameController.squareList[position];
+				
+				
+				updateGui();
+				resetLabels();
+				btnEndTurn.setEnabled(false);
+			}
+		});
+
 		for (Player p : MonopolyGameController.players) {
 
 			PlayerGUI g=new PlayerGUI(p);
 
+			player_guis.add(g);
+
 			players_panel.add(g.playerStatPanel);
 		}
-		/*
-		if(MonopolyGameController.places.get(MonopolyGameController.getCurrentPlayer().getPosition()).buyable){
-			lblBuyable.setVisible(true);
-		}else{
-			lblBuyable.setVisible(false);
-		}
-		*/
 
+
+	}
+
+	public void updateGui() {
+		if(prop.getClass() == TitleDeed.class) {
+			TitleDeed temp = (TitleDeed) prop;
+			if(temp.getOwner()!=current && temp.getOwner()!=null) {
+				PayRent_PopUp_Window payrentPopUp = new PayRent_PopUp_Window();
+				payrentPopUp.setPropertyName(prop.getName());
+				payrentPopUp.setOwner(temp.getOwner().getName());
+				payrentPopUp.setCurrentBalance(current.getBalance());
+				payrentPopUp.setRentAmount(temp.calculateRent());
+				payrentPopUp.calculateRemaining();
+				payrentPopUp.show();
+				if(payrentPopUp.success) {
+					MonopolyGameController.payRent(temp.calculateRent());	
+				}
+			}
+		}
+
+		if(prop.getBuyable().getBuyableType()){
+			buy_panel.setVisible(true);
+			if(prop.getClass() == TitleDeed.class) {
+				TitleDeed title_temp = (TitleDeed) prop;
+				lblBuyable_price_label.setText(title_temp.getPrice()+" $"); 
+			}
+			if(prop.getClass() == Transportation.class) {
+				Transportation trans_temp = (Transportation) prop;
+				lblBuyable_price_label.setText(trans_temp.getPrice()+" $"); 
+			}
+			lblBuyable_property_name.setText(prop.getName());
+			
+		}else{
+			buy_panel.setVisible(false);
+		}
+
+		lblTurn_label.setText(current.getName());
+
+
+		if(!first_roll) {
+			btnRoll.setEnabled(false);
+		}else {
+			btnRoll.setEnabled(true);
+		}
+
+		player_guis.get(player_count-1).balance_label.setText(current.getBalance()+" $");
+		player_guis.get(player_count-1).lblPosition.setText(prop.getName());
+		for(TitleDeed t: current.getOwnedTitleDeeds()) {
+			String temp = "";
+			temp += t.getName()+" ";
+			player_guis.get(player_count-1).deeds_label.setText(temp);
+		}
+		for(Transportation tp: current.getOwnedTransportation()) {
+			String temp = "";
+			temp += tp.getName()+" ";
+			player_guis.get(player_count-1).companies_label.setText(temp);
+		}
+	}
+
+	public void resetLabels() {
+		lblFaceVal1_label.setText("0");
+		lblFaceVal2_label.setText("0");
+		lblTotalMove_label.setText("0");
+		lblCurrentPosition_label.setText(prop.getName());
+		buy_panel.setVisible(false);
 	}
 }

@@ -1,11 +1,11 @@
-package domain.squares;
+package domain.squares.propertysquares;
 
 import domain.MonopolyGameController;
 import domain.Player;
 
 public class CabCompany extends Transportation {
 
-	public CabCompany(String name) {
+	public CabCompany(int i, String name) {
 		super(name);
 		// TODO Auto-generated constructor stub
 	}
@@ -25,9 +25,9 @@ public class CabCompany extends Transportation {
 	}
 
 	@Override
-	public void calculateRent() {
+	public double calculateRent() {
+		return rent;
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -55,4 +55,20 @@ public class CabCompany extends Transportation {
 		this.name=name;
 		
 	}
+
+	@Override
+	public boolean getMortgageStatus() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setMortgageStatus(boolean mortgageStatus) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+
+
 }

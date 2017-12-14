@@ -1,4 +1,4 @@
-package domain.squares;
+package domain.squares.propertysquares;
 
 import domain.Player;
 
@@ -18,7 +18,7 @@ public abstract class Transportation extends PropertySquare {
 
 	public abstract int getPrice();
 
-	public abstract void calculateRent();
+	public abstract double calculateRent();
 	
 	public abstract String getName();
 

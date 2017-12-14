@@ -1,4 +1,4 @@
-package domain.squares;
+package domain.squares.propertysquares;
 
 import domain.MonopolyGameController;
 import domain.Player;
@@ -40,9 +40,9 @@ public class TrainStation extends Transportation {
 	}
 
 	@Override
-	public void calculateRent() {
+	public double calculateRent() {
+		return rent;
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -54,5 +54,18 @@ public class TrainStation extends Transportation {
 	public void setName(String name) {
 		this.name=name;
 	}
+
+	@Override
+	public boolean getMortgageStatus() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setMortgageStatus(boolean mortgageStatus) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

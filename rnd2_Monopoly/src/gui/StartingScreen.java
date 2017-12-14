@@ -70,7 +70,6 @@ public class StartingScreen {
 					if(MonopolyGameController.LoadGame()) {
 						frame.setVisible(false);
 						monopolyBoard = new MonopolyBoard();
-						
 						for(Player p: MonopolyGameController.players) {
 							System.out.println(p.getName());
 						}
