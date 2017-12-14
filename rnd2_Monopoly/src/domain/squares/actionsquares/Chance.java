@@ -2,8 +2,10 @@ package domain.squares.actionsquares;
 
 import java.util.ArrayList;
 
-import domain.ChanceCard;
+import domain.MonopolyGameController;
 import domain.Player;
+import domain.cards.ChanceCard;
+import gui.TakeCard_PopUp_Window;
 
 public class Chance extends ActionSquare {
 
@@ -14,7 +16,13 @@ public class Chance extends ActionSquare {
 
 	@Override
 	public void landedOn(Player p) {
-		// TODO Auto-generated method stub
+		
+		
+		int randomCardIndex = 0;
+
+		ChanceCard pickedCard = MonopolyGameController.chanceCardDeck.get(randomCardIndex);
+
+		pickedCard.doCardAction(p);
 
 	}
 

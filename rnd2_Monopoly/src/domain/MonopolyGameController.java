@@ -17,6 +17,8 @@ import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 
+import domain.cards.ChanceCard;
+import domain.cards.CommunityChestCard;
 import domain.squares.Square;
 import domain.squares.actionsquares.*;
 import domain.squares.propertysquares.*;
