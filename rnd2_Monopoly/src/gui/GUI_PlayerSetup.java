@@ -27,6 +27,7 @@ public class GUI_PlayerSetup extends JFrame{
 	private int counter = 0; 
 	private int counter2 = 1; 
 	private boolean first=true;
+	private boolean first_player=true;
 	
 	
 	//Launches and creates the Player setup window
@@ -62,10 +63,14 @@ public class GUI_PlayerSetup extends JFrame{
 				if(textField.getText().length()==0) {
 					JOptionPane.showMessageDialog(null,"Please give the player a name!");
 				}else {
-					
+					if(first_player) {
+						new_player.setCheckTurn(true);
+						first_player=false;
+					}else {
+						new_player.setCheckTurn(false);
+					}
 					new_player.setName(textField.getText());
-					new_player.setBalance(1000);
-					new_player.setCheckTurn(true);
+					new_player.setBalance(1000);		
 					new_player.setPosition(0);
 					
 					MonopolyGameController.players.add(new_player);

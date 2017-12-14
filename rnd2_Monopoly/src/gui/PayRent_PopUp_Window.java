@@ -25,6 +25,8 @@ public class PayRent_PopUp_Window extends JDialog {
 	private JLabel lblRentAmount_label;
 	private JLabel lblCurrentBalance_label;
 	private JLabel lblRemainingBalance_label;
+	private JLabel lblPropertyname;
+	private JLabel lblOwner_label;
 	public boolean success = false;
 	
 	public PayRent_PopUp_Window() {
@@ -40,7 +42,7 @@ public class PayRent_PopUp_Window extends JDialog {
 			JLabel lblPayRent_header_message = new JLabel("You have to pay rent!!");
 			lblPayRent_header_message.setHorizontalAlignment(SwingConstants.CENTER);
 			lblPayRent_header_message.setFont(new Font("Tahoma", Font.BOLD, 14));
-			lblPayRent_header_message.setBounds(109, 22, 207, 55);
+			lblPayRent_header_message.setBounds(108, 11, 207, 24);
 			contentPanel.add(lblPayRent_header_message);
 		}
 		
@@ -73,6 +75,21 @@ public class PayRent_PopUp_Window extends JDialog {
 		lblRemainingBalance_label.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblRemainingBalance_label.setBounds(249, 163, 77, 14);
 		contentPanel.add(lblRemainingBalance_label);
+		
+		lblPropertyname = new JLabel("Property_Name");
+		lblPropertyname.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPropertyname.setBounds(55, 46, 122, 24);
+		contentPanel.add(lblPropertyname);
+		
+		JLabel lblOwner = new JLabel("Owner :");
+		lblOwner.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblOwner.setBounds(215, 46, 62, 21);
+		contentPanel.add(lblOwner);
+		
+		lblOwner_label = new JLabel("New label");
+		lblOwner_label.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblOwner_label.setBounds(287, 46, 84, 21);
+		contentPanel.add(lblOwner_label);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBounds(60, 209, 309, 41);
@@ -88,10 +105,13 @@ public class PayRent_PopUp_Window extends JDialog {
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
 						// TODO Auto-generated method stub
-						if(Integer.parseInt(lblRemainingBalance_label_header.getText())<=0) {
+						
+						if(Double.parseDouble(lblRemainingBalance_label.getText())<=0) {
 							JOptionPane.showMessageDialog(null, "Game Over! \nYou are bankrupted!!!");
+							
 						}else {
 							success = true;
+							
 						}
 					}
 				});
@@ -106,6 +126,12 @@ public class PayRent_PopUp_Window extends JDialog {
 		lblCurrentBalance_label.setText(d+"");
 	}
 	public void calculateRemaining() {
-		lblRemainingBalance_label.setText(""+(Integer.parseInt(lblCurrentBalance_label.getText())-Integer.parseInt(lblRentAmount_label.getText())));
+		lblRemainingBalance_label.setText(""+(Double.parseDouble(lblCurrentBalance_label.getText())-Double.parseDouble(lblRentAmount_label.getText())));
+	}
+	public void setPropertyName(String name) {
+		lblPropertyname.setText(name);
+	}
+	public void setOwner(String name) {
+		lblOwner_label.setText(name);
 	}
 }

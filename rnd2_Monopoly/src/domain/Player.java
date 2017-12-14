@@ -31,13 +31,19 @@ public class Player {
 	@Expose
 	ArrayList<TitleDeed> ownedTitleDeeds=new ArrayList<TitleDeed>();
 	
+	
 	@SerializedName("Owned_Transportation")
 	@Expose
 	ArrayList<Transportation> ownedTransportation=new ArrayList<Transportation>();
 
+	@SerializedName("isInJail")
+	@Expose
+	private boolean isInJail;
+	
 	public Player(String name, double balance) {
 		this.name=name;
 		this.balance=balance;
+		setInJail(false);
 	}
 	public Player() {}
 	
@@ -48,6 +54,12 @@ public class Player {
 		this.checkTurn = checkTurn;
 	}
 	
+	public boolean isInJail() {
+		return isInJail;
+	}
+	public void setInJail(boolean isInJail) {
+		this.isInJail = isInJail;
+	}
 	public int getPosition() {
 		return position;
 	}

@@ -2,12 +2,13 @@ package domain.squares.actionsquares;
 
 import domain.squares.ActionBehavior;
 import domain.squares.Square;
+import domain.squares.notBuy;
 
 public abstract class ActionSquare extends Square implements ActionBehavior{
-
-	public ActionSquare(String name) {
+	public abstract String toString();
+	public ActionSquare(int index) {
 		super();
-		// TODO Auto-generated constructor stub
+		this.buyable = new notBuy();
 	}
 
 	

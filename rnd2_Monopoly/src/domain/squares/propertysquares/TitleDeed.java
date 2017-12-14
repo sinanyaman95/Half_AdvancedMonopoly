@@ -1,17 +1,21 @@
 package domain.squares.propertysquares;
 
+import java.util.ArrayList;
+
 import domain.MonopolyGameController;
 import domain.Player;
+import domain.squares.BuyableBehavior;
+import domain.squares.canBuy;
+import domain.squares.notBuy;
 
 public class TitleDeed extends PropertySquare {
 	
-	/*
-	public int price;
-	public int rent;
-	public int mortgageValue;
-	public Player owner;
-	*/
+
 	
+	public int index;
+	public double zeroRent;
+	public ArrayList<Double> titled_rent;
+	public int buildingPrice;
 	
 	public boolean twoColorDeed;
 	public boolean threeColorDeed;
@@ -19,21 +23,29 @@ public class TitleDeed extends PropertySquare {
 	public int numberOfHotels;
 	public int numberOfSkyscrapers;
 	
-
 	//////////////////////////////////////////////////////////////////////////////////////////////
-	public TitleDeed(String tname,int priceVal,int rentVal,int mortgageVal,String clr) {
-		//update
+	public TitleDeed(int index,String name,String color,int price,int zeroRent,int mortgageVal,int numberOfHouses, 
+			int numberOfHotels, int numberOfSkyscrapers, int buildingPrice) {
+		
 		super();
-		name=tname;
-		owner=MonopolyGameController.bank;
-		price=priceVal;
-		rent=rentVal;
-		mortgageValue=mortgageVal;
-		color=clr;
-		if(owner==null) {
-			buyable = false;
+		this.index=index;
+		this.name = name;
+		this.color=color;
+		this.price=price;
+		this.zeroRent=zeroRent;
+		this.mortgageValue=mortgageVal;
+		this.numberOfHouses = numberOfHouses;
+		this.numberOfHotels = numberOfHotels;
+		this.numberOfSkyscrapers = numberOfSkyscrapers;
+		this.titled_rent = new ArrayList<Double>();
+		this.mortgageStatus=false;
+		
+		//We'll discuss this part, it might cause bugs.
+		// Do we need buyable field since it is property square for sure??
+		if(owner==MonopolyGameController.bank) {
+			buyable = new notBuy();
 		}else {
-			buyable = true;
+			buyable = new canBuy();
 		}
 		
 		
@@ -45,7 +57,7 @@ public class TitleDeed extends PropertySquare {
 
 			// if the owner of the title deed is the bank
 			// (no one owns the title deed), assign the new owner and update balance
-			if (s.getOwner().getName().equals("Bank") && p.getBalance() >= s.getPrice()) {
+			if (/*s.getOwner().getName().equals("Bank") && */p.getBalance() >= s.getPrice()) {
 				MonopolyGameController.bank.getOwnedTitleDeeds().remove(s);
 				s.setOwner(p);
 				p.getOwnedTitleDeeds().add((TitleDeed)s);
@@ -56,7 +68,7 @@ public class TitleDeed extends PropertySquare {
 		
 		
 	}
-	public boolean isBuyable() {
+	public BuyableBehavior isBuyable() {
 		return buyable;
 	}
 	
@@ -74,7 +86,7 @@ public class TitleDeed extends PropertySquare {
 
 	@Override
 	public int getPrice() {
-		// TODO Auto-generated method stub
+
 		return this.price;
 	}
 
@@ -185,9 +197,13 @@ public class TitleDeed extends PropertySquare {
 	}
 
 	@Override
-	public void calculateRent() {
+	public double calculateRent() {
 		// TODO Auto-generated method stub
-		
+		if(this.numberOfHouses == 0) {
+			return this.zeroRent;
+		}else {
+			return this.titled_rent.get((numberOfHouses + numberOfHotels + numberOfSkyscrapers) - 1);
+		}
 	}
 
 	
@@ -199,12 +215,12 @@ public class TitleDeed extends PropertySquare {
 		this.name = name;
 	}
 
-	public int getRent() {
-		return rent;
+	public ArrayList<Double> getRent() {
+		return titled_rent;
 	}
 
-	public void setRent(int rent) {
-		this.rent = rent;
+	public void setRent(ArrayList<Double> rent) {
+		this.titled_rent = rent;
 	}
 
 	public int getMortgageValue() {
@@ -243,12 +259,29 @@ public class TitleDeed extends PropertySquare {
 		this.price = price;
 	}
 
+	
+	public void addTaxList (double oneHouse, double twoHouse, double threeHouse, double fourHouse, double hotel, double skyScraper) {
+		this.titled_rent.add(oneHouse);
+		this.titled_rent.add(twoHouse);
+		this.titled_rent.add(threeHouse);
+		this.titled_rent.add(fourHouse);
+		this.titled_rent.add(hotel);
+		this.titled_rent.add(skyScraper);
+		
+			
+	}
+
 	@Override
-	public void landedOn() {
+	public boolean getMortgageStatus() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setMortgageStatus(boolean mortgageStatus) {
 		// TODO Auto-generated method stub
 		
 	}
-
 
 
 }
