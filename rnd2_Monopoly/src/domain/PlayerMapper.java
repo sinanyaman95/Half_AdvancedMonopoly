@@ -12,10 +12,18 @@ public class PlayerMapper {
 	@Expose
 	private ArrayList<Player> players = null;
 
+	
+	/**
+	 * @return  the players registered as an arraylist
+	 */
 	public ArrayList<Player> getPlayers() {
 	return players;
 	}
 
+	/**
+	 * @param players
+	 * @modifies players arraylist, registers the players
+	 */
 	public void setPlayers(ArrayList<Player> players) {
 	this.players = players;
 	}

@@ -40,16 +40,20 @@ public class Player {
 	@SerializedName("isInJail")
 	@Expose
 	private boolean isInJail;
+
 	
 	@SerializedName("buildingFacade")
 	@Expose
 	public BuildingFacade buildingFacade;
+
 	
 	public Player(String name, double balance) {
 		this.name=name;
 		this.balance=balance;
 		setInJail(false);
+
 		this.buildingFacade = new BuildingFacade();
+
 	}
 	public Player() {}
 	
@@ -164,6 +168,22 @@ public class Player {
 		this.buildingFacade = buildingFacade;
 	}
 
+	
+	public String toString() {
+		return "Player name: "+  this.getName() + "balance: " + this.getBalance() + "\n[Owned Deeds]: " + this.getOwnedTitleDeeds().toString()
+				+ "\n[Owned Transportation]: " + this.getOwnedTransportation();
+	}
+	
+	public boolean repOK() {
+		boolean asserter = false;
+		for(TitleDeed td : this.getOwnedTitleDeeds()){
+			if(td instanceof TitleDeed) asserter = true;
+		}
+		if(this.getName() instanceof String) asserter=true;
+		
+		return asserter;
+		
+	}
 
 
 }

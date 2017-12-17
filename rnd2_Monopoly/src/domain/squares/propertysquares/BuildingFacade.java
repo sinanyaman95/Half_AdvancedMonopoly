@@ -2,6 +2,10 @@ package domain.squares.propertysquares;
 
 import domain.Player;
 
+/**
+ * @author rnd2
+ * @overview Building facade communicates with 3 classes HouseChecker, HotelChecker, SkyscraperChecker to decide whether player is eligible to build House, Hotel and Skyscraper and builds if so.
+ */
 public class BuildingFacade {
 	//OVERVIEW: Building facade communicates with 3 classes HouseChecker, HotelChecker, SkyscraperChecker 
 	//to decide whether player is eligible to build House, Hotel and Skyscraper and builds if so.
@@ -26,8 +30,7 @@ public class BuildingFacade {
 		if(houseCheck.houseAvailable(p, property)) {
 			property.setNumberOfHouses(property.getNumberOfHouses() + 1);
 			p.setBalance(p.getBalance()-property.getHouseCost());
-		}
-			
+		}	
 	}
 	
 	/**
@@ -54,5 +57,9 @@ public class BuildingFacade {
 			property.setNumberOfSkyscrapers(property.getNumberOfSkyscrapers() + 1);
 			p.setBalance(p.getBalance()-property.getSkyscraperCost());
 		}
+	}
+	
+	public String toString() {
+		return "Facade initiated";
 	}
 }

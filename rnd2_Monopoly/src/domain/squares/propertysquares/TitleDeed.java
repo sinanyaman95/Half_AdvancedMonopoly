@@ -8,6 +8,11 @@ import domain.squares.BuyableBehavior;
 import domain.squares.canBuy;
 import domain.squares.notBuy;
 
+/**
+ * @author rnd2
+ * @overview class of all buyable and buildable Deeds
+ *
+ */
 public class TitleDeed extends PropertySquare {
 	
 
@@ -39,6 +44,7 @@ public class TitleDeed extends PropertySquare {
 		this.numberOfSkyscrapers = numberOfSkyscrapers;
 		this.titled_rent = new ArrayList<Double>();
 		this.mortgageStatus=false;
+		this.buildingPrice = buildingPrice;
 		
 		//We'll discuss this part, it might cause bugs.
 		// Do we need buyable field since it is property square for sure??
@@ -176,6 +182,7 @@ public class TitleDeed extends PropertySquare {
 		this.price = price;
 	}
 
+
 	/**
 	 * @param oneHouse
 	 * @param twoHouse
@@ -186,6 +193,7 @@ public class TitleDeed extends PropertySquare {
 	 * @effects receives a tax list of 6 integers and creates the rent prices for title deeds.
 	 * @modifies this.rent
 	 */
+
 	public void addTaxList (double oneHouse, double twoHouse, double threeHouse, double fourHouse, double hotel, double skyScraper) {
 		this.titled_rent.add(oneHouse);
 		this.titled_rent.add(twoHouse);
@@ -208,6 +216,19 @@ public class TitleDeed extends PropertySquare {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	public double getHouseCost() {
+		return this.buildingPrice;
+	}
+	public double getHotelCost() {
+		return this.buildingPrice;
+	}
+	public double getSkyscraperCost() {
+		return this.buildingPrice;
+	}
+	
+	public String toString() {
+		return "Title Deed name: " + this.getName() + ", color: " + this.getColor() + ", price: " + this.getPrice() + ", taxes: " + this.getRent();
+	}
 
 }

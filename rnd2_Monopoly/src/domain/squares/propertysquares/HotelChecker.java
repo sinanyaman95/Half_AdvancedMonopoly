@@ -16,7 +16,8 @@ public class HotelChecker {
 	 * @return true if MajorityOwnership and other requirements are met for building a hotel for the property
 	 */
 	public boolean HotelAvailable(Player p,TitleDeed property) {
-		if (getHouseCheck().houseAvailable(p, property) && p.getBalance() >= property.getHotelCost()){
+		this.numHouses = property.getNumberOfHouses();
+		if (p.getBalance() >= property.getHotelCost()){
 			return (getNumHouses() == 4 && property.getNumberOfHotels() < 1);
 		}
 		return false;

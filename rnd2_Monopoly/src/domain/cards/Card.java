@@ -5,7 +5,10 @@ import domain.Player;
 public interface Card {
 	
 	
-	
+	/**
+	 * @effects applies the specific action of the card
+	 * @param p
+	 */
 	public void doCardAction(Player p);
     public String toString();
 

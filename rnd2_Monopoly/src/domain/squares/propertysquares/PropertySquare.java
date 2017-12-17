@@ -5,7 +5,6 @@ import domain.squares.Square;
 import domain.squares.canBuy;
 
 public abstract class PropertySquare extends Square {
-	public String name;
 	public String color;
 	public int price;
 	public int rent;
@@ -14,20 +13,27 @@ public abstract class PropertySquare extends Square {
 	public boolean mortgageStatus;
 	
 	
-	/**
-	 * @return mortgageStatus - if a property square is mortgaged or not
-	 */
 	public abstract boolean getMortgageStatus();
 	
 	public abstract void setMortgageStatus(boolean mortgageStatus);
+	
+	/**
+	 * @param p: current player
+	 * @param s: square the player wants to purchase
+	 * @requires buy button must be pressed
+	 * @modifies changes the properties owner
+	 * @effects player's owned properties list is updated 
+	 */
+	public abstract void performPurchase(Player p, PropertySquare s);
 
 	public abstract Player getOwner();
 
 	/**
-	 * @effect calculates the rent to be paid depending on the buildings a property square has
-	 * @requires a property square has at least 1 house
+	 * @requires pay rent must be called beforehand
+	 * @effects calculates rent for the given property
+	 * @return
 	 */
-	public abstract void calculateRent();
+	public abstract double calculateRent();
 
 	public abstract void setOwner(Player owner);
 
@@ -37,13 +43,5 @@ public abstract class PropertySquare extends Square {
 		super();
 		buyable = new canBuy();
 	}
-
-	/**
-	 * @param p -Player
-	 * @param s -TitleDeed
-	 * @modifies player balance 
-	 * @effect TitleDeed s is added to player's inventory and s's owner is set to be the player. Player's balance is decreased by the price of s.
-	 */
-	public abstract void performPurchase(Player p, TitleDeed s);
 
 }
