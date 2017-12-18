@@ -27,8 +27,10 @@ import domain.squares.actionsquares.taxes.*;
 import gui.MonopolyBoard;
 import gui.StartingScreen;
 
-
-
+/**
+ * @author rnd2
+ *
+ */
 public class MonopolyGameController {
 	
 	private static MonopolyGameController instance = new MonopolyGameController();
@@ -421,6 +423,11 @@ public class MonopolyGameController {
 		//players.add(bank);
 	}
 
+	/**
+	 * 
+	 * @effects walks in the player list and checks which player is the current one
+	 * @return the current player
+	 */
 	public static Player getCurrentPlayer() {
 		for(Player p: players) {
 			if(p.isCheckTurn()) {
@@ -431,12 +438,19 @@ public class MonopolyGameController {
 		
 	}
 	
-	public static void payRent(TitleDeed deed,double rentAmount) {
+	/**
+	 * @effects changes the balance of the current player
+	 * @param rentAmount
+	 */
+	public static void payRent(double rentAmount) {
 		double currentBalance = getCurrentPlayer().getBalance();
 		getCurrentPlayer().setBalance(currentBalance-rentAmount);
-		deed.getOwner().setBalance(deed.getOwner().getBalance()+rentAmount);
 	}
 	
+	/**
+	 * @effects saves the game in a json file
+	 * @return
+	 */
 	public static boolean SaveGame() {
 		
 		JSONObject object = new JSONObject();
@@ -485,6 +499,16 @@ public class MonopolyGameController {
 		return true;
 	}
 
+	/**
+	 * requires a game which was previously saved must be in the json file
+	 * @effects loads the game from the json file
+	 * @return
+	 * @throws ParseException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 * @throws NoSuchFieldException
+	 * @throws SecurityException
+	 */
 	public static boolean LoadGame() throws ParseException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
 		Gson gs = new Gson();
 		BufferedReader br = null;

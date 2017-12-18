@@ -8,6 +8,11 @@ import domain.squares.BuyableBehavior;
 import domain.squares.canBuy;
 import domain.squares.notBuy;
 
+/**
+ * @author rnd2
+ * @overview class of all buyable and buildable Deeds
+ *
+ */
 public class TitleDeed extends PropertySquare {
 	
 
@@ -39,22 +44,19 @@ public class TitleDeed extends PropertySquare {
 		this.numberOfSkyscrapers = numberOfSkyscrapers;
 		this.titled_rent = new ArrayList<Double>();
 		this.mortgageStatus=false;
+		this.buildingPrice = buildingPrice;
 		
 		//We'll discuss this part, it might cause bugs.
 		// Do we need buyable field since it is property square for sure??
-		if(owner==MonopolyGameController.bank) {
+		/*if(owner==MonopolyGameController.bank) {
 			buyable = new notBuy();
 		}else {
 			buyable = new canBuy();
-		}
-		
-		
+		}*/
 	}
 
 	@Override
 	public void performPurchase(Player p,PropertySquare s) {
-		
-
 			// if the owner of the title deed is the bank
 			// (no one owns the title deed), assign the new owner and update balance
 			if (/*s.getOwner().getName().equals("Bank") && */p.getBalance() >= s.getPrice()) {
@@ -64,9 +66,6 @@ public class TitleDeed extends PropertySquare {
 				p.setBalance(p.getBalance() - s.getPrice());
 
 			}
-
-		
-		
 	}
 	public BuyableBehavior isBuyable() {
 		return buyable;
@@ -88,82 +87,6 @@ public class TitleDeed extends PropertySquare {
 	public int getPrice() {
 
 		return this.price;
-	}
-
-	public boolean BuildHouse(Player p) {
-		TitleDeed property = null;
-		for(TitleDeed s: p.getOwnedTitleDeeds()) {
-			if(s.name.equals(this.name)) {
-				property = s;
-			}else {
-				return false;
-			}
-		}
-		if(isMajorityOwner(property)) {
-			(property).increaseNumberOfHouses();	
-			return true;
-		}
-		return false;
-	}
-
-	public boolean BuildHotel(Player p) {
-		TitleDeed property = null;
-		for(TitleDeed s: p.getOwnedTitleDeeds()) {
-			if(s.name.equals(this.name)) {
-				property = s;
-			}else {
-				return false;
-			}
-		}
-		if(isMajorityOwner(property)) {
-			(property).increaseNumberOfHotels();	
-			return true;
-		}
-		return false;
-	}
-
-	public boolean BuildSkyscraper(Player p) {
-		TitleDeed property = null;
-		for(TitleDeed s: p.getOwnedTitleDeeds()) {
-			if(s.name.equals(this.name)) {
-				property = s;
-			}else {
-				return false;
-			}
-		}
-		if(isMonopoly(property,p)) {
-			(property).setNumberOfSkyscrapers(1);
-			return true;
-		}
-		return false;
-
-	}
-
-	public boolean isMajorityOwner(PropertySquare property){
-		return false;
-
-	}
-	public boolean isMonopoly(TitleDeed property,Player p){
-		int color_count = 1; 
-		boolean hasHotel = false;
-		for(TitleDeed s: p.getOwnedTitleDeeds()) {
-			if(s.color.equals(property.color)) {
-				color_count ++;
-				if((s).getNumberOfHotels() != 0) {
-					hasHotel = true;
-				}else {
-					hasHotel = false;
-				}
-			}
-		}
-		if(hasHotel) {
-			if(color_count == 3 && property.threeColorDeed) {
-				return true;
-			}else if(color_count == 2 && property.twoColorDeed) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public void increaseNumberOfHouses() {
@@ -259,7 +182,18 @@ public class TitleDeed extends PropertySquare {
 		this.price = price;
 	}
 
-	
+
+	/**
+	 * @param oneHouse
+	 * @param twoHouse
+	 * @param threeHouse
+	 * @param fourHouse
+	 * @param hotel
+	 * @param skyScraper
+	 * @effects receives a tax list of 6 integers and creates the rent prices for title deeds.
+	 * @modifies this.rent
+	 */
+
 	public void addTaxList (double oneHouse, double twoHouse, double threeHouse, double fourHouse, double hotel, double skyScraper) {
 		this.titled_rent.add(oneHouse);
 		this.titled_rent.add(twoHouse);
@@ -282,6 +216,19 @@ public class TitleDeed extends PropertySquare {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	public double getHouseCost() {
+		return this.buildingPrice;
+	}
+	public double getHotelCost() {
+		return this.buildingPrice;
+	}
+	public double getSkyscraperCost() {
+		return this.buildingPrice;
+	}
+	
+	public String toString() {
+		return "Title Deed name: " + this.getName() + ", color: " + this.getColor() + ", price: " + this.getPrice() + ", taxes: " + this.getRent();
+	}
 
 }

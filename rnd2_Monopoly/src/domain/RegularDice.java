@@ -10,18 +10,26 @@ public class RegularDice implements Dice{
 		super();
 	}
 	
-	@Override
 	public void roll() {
 		// TODO Auto-generated method stub
 		Random rand = new Random();
 		faceVal = ""+(rand.nextInt(6)+1);
 	}
 
-	@Override
 	public String getFaceValue() {
 		// TODO Auto-generated method stub
 		return faceVal;
 	}
 	
+	public String toString() {
+		return "Regular Die rolled, face value is: " + this.getFaceValue();
+	}
+	
+	public boolean repOK() {
+		boolean asserter = false;
+		if(this.getFaceValue() instanceof String) asserter = true;
+		
+		return asserter;
+	}
 	
 }

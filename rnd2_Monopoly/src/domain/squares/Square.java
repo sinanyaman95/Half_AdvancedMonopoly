@@ -1,7 +1,11 @@
 package domain.squares;
 
+/**
+ * @author rnd2
+ * @overview abstract super class of all squares
+ */
 public abstract class Square {
-
+	
 	//public ActionBehavior actionBehavior;
 	protected String name;
 	
@@ -22,4 +26,5 @@ public abstract class Square {
 	public void setBuyable(BuyableBehavior buyable) {
 		this.buyable = buyable;
 	}
+	
 }
