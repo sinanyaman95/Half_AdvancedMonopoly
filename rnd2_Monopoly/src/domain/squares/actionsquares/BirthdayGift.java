@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import domain.Player;
+import domain.squares.Square;
 
 public class BirthdayGift extends ActionSquare{
 
@@ -59,6 +60,23 @@ public class BirthdayGift extends ActionSquare{
 	public String toString() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public static boolean repOK() {
+		//check if the player's balance or position changes after method call.
+		ActionSquare testSquare =new BirthdayGift(0);
+		Player player=new Player("SomePlayer", 1000);
+		double beforeBalance=player.getBalance();
+		testSquare.landedOn(player);
+		double afterBalance=player.getBalance();
+		int afterPosition=player.getPosition();
+		if((beforeBalance+100==afterBalance)||afterPosition==46) {
+			return true;
+		}else {
+			return false;
+		}
+		
+		
 	}
 
 }

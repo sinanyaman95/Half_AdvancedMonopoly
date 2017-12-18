@@ -13,10 +13,12 @@ public class Test {
 
 	public static void main(String[] args) throws IOException, ParseException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException, URISyntaxException {
 		// TODO Auto-generated method stub
-		MonopolyGameController m = new MonopolyGameController();
+		//MonopolyGameController m = new MonopolyGameController();
+		StartingScreen startingScreen = new StartingScreen();
+		
 		//m.initPlayers();
 		//m.SaveGame();
 		//m.LoadGame();
-		m.initBoard();
+		//m.initBoard();
 	}
 }

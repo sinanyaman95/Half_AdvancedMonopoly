@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import domain.squares.propertysquares.BuildingFacade;
+import domain.bot.JailObserver;
+import domain.bot.MonopolyBotObserver;
 import domain.squares.propertysquares.PropertySquare;
 import domain.squares.propertysquares.TitleDeed;
 import domain.squares.propertysquares.Transportation;
@@ -40,20 +41,13 @@ public class Player {
 	@SerializedName("isInJail")
 	@Expose
 	private boolean isInJail;
-
 	
-	@SerializedName("buildingFacade")
-	@Expose
-	public BuildingFacade buildingFacade;
-
+	public ArrayList<MonopolyBotObserver> playerObservers=new ArrayList<MonopolyBotObserver>();
 	
 	public Player(String name, double balance) {
 		this.name=name;
 		this.balance=balance;
 		setInJail(false);
-
-		this.buildingFacade = new BuildingFacade();
-
 	}
 	public Player() {}
 	
@@ -79,13 +73,7 @@ public class Player {
 	}
 
 	
-	/**
-	 * @param p - PropertySquare which stands for buyable squares superclass
-	 * 
-	 * @effect Player buys the property p, p is added to the Player's OwnedTitleDeeds list, Player's balance is decreased with p's price
-	 * @modifies p - p's owner will set to be "this" player
-	 * 
-	 */
+
 	public void buyProperty(PropertySquare p) {
 		p.performPurchase(this, p);
 	}
@@ -130,60 +118,13 @@ public class Player {
 	public String getName() {
 		return name;
 	}
-	
-	/**
-	 * @param property
-	 * @effect Player builds a House to the TitleDeed he/she owns if the requirements of building House is met.
-	 * @modifies property - property's numberOfHouses will be increased by 1
-	 */
-	public void buildHouse(TitleDeed property) {
-		buildingFacade.buildHouse(this, property);
-	}
-
-	/**
-	 * @param property
-	 * @effect Player builds a Hotel to the TitleDeed he/she owns if the requirements of building Hotel is met.
-	 * @modifies property - property's numberOfHouses will be increased by 1
-	 */
-	public void buildHotel(TitleDeed property) {
-		buildingFacade.buildHotel(this, property);
-	}
-	
-	
-	/**
-	 * @param property
-	 * @effect Player builds a SkyScraper to the TitleDeed he/she owns if the requirements of building Skyscraper is met.
-	 * @modifies property - property's numberOfSkyscrapers will be increased by 1
-	 */
-	public void buildSkyscraper(TitleDeed property) {
-		buildingFacade.buildSkyscraper(this, property);
-	}
-	
-	
-	public BuildingFacade getBuildingFacade() {
-		return this.buildingFacade;
-	}
-	
-	public void setBuildingFacade(BuildingFacade buildingFacade) {
-		this.buildingFacade = buildingFacade;
-	}
-
-	
-	public String toString() {
-		return "Player name: "+  this.getName() + "balance: " + this.getBalance() + "\n[Owned Deeds]: " + this.getOwnedTitleDeeds().toString()
-				+ "\n[Owned Transportation]: " + this.getOwnedTransportation();
-	}
-	
-	public boolean repOK() {
-		boolean asserter = false;
-		for(TitleDeed td : this.getOwnedTitleDeeds()){
-			if(td instanceof TitleDeed) asserter = true;
-		}
-		if(this.getName() instanceof String) asserter=true;
-		
-		return asserter;
-		
-	}
-
+	 public void notifyObservers(){
+	      for (MonopolyBotObserver o : playerObservers) {
+	         o.update();
+	      }
+	   }
+	  public void attachObserver(MonopolyBotObserver o){
+	      playerObservers.add(o);		
+	   }
 
 }

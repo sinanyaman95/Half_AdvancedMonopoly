@@ -1,17 +1,26 @@
 package domain.bot;
 
+import domain.Player;
+import gui.MonopolyBoard;
+
 public class JailObserver extends MonopolyBotObserver {
-
-	@Override
-	public void evaluateGame() {
-		// TODO Auto-generated method stub
-
+	
+	public JailObserver(Player subject) {
+		  this.playerSubject = subject;
+	      this.playerSubject.attachObserver(this);
 	}
+
+
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		// show sad emotion
+		System.out.println("Sad");//test
 
 	}
+
+
+	
+	
 
 }

@@ -21,6 +21,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import domain.*;
+import domain.bot.JailObserver;
+import domain.bot.MonopolyBotObserver;
 import domain.squares.Square;
 import domain.squares.propertysquares.PropertySquare;
 import domain.squares.propertysquares.TitleDeed;
@@ -61,6 +63,8 @@ public class MonopolyBoard extends JFrame{
 	private int player_count = 1;
 
 	private ArrayList<PlayerGUI> player_guis;
+	
+	
 
 	public MonopolyBoard() {
 		player_guis = new ArrayList<PlayerGUI>();
@@ -73,6 +77,8 @@ public class MonopolyBoard extends JFrame{
 	}
 
 	private void initialize() {
+		
+		
 		getContentPane().setBackground(new Color(64, 224, 208));
 		setBounds(100, 100, 1920, 1080);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -253,7 +259,6 @@ public class MonopolyBoard extends JFrame{
 		position = current.getPosition();
 		prop = MonopolyGameController.squareList[position];
 
-		
 		btnRoll.addActionListener(new ActionListener() {
 
 			@Override
@@ -284,13 +289,9 @@ public class MonopolyBoard extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				if(prop.getBuyable().getBuyableType()) {
-					current.buyProperty((TitleDeed) prop);
-					if(prop.getClass() == TitleDeed.class) {
-						player_guis.get(player_count-1).comboBox_TitleDeeds.addItem(prop.getName());
-					}else if(prop.getClass() == Transportation.class) {
-						player_guis.get(player_count-1).comboBox_TitleDeeds.addItem(prop.getName());
-					}
+				if(MonopolyGameController.squareList[position].getBuyable().getBuyableType()) {
+					current.buyProperty((TitleDeed) MonopolyGameController.squareList[position]);
+				
 					updateGui();
 					buy_panel.setVisible(false);
 				}
@@ -331,17 +332,12 @@ public class MonopolyBoard extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
 				// TODO Auto-generated method stub
-				
-				updatePlayerGui();
-				
 				if(player_count == MonopolyGameController.players.size()) {
 					player_count=0;
 				}
-				
 				player_count ++;
-				first_roll = true;	
+				first_roll = true;
 				current = MonopolyGameController.players.get(player_count-1);
 				position = current.getPosition();
 				prop = MonopolyGameController.squareList[position];
@@ -349,7 +345,6 @@ public class MonopolyBoard extends JFrame{
 				
 				updateGui();
 				resetLabels();
-				
 				btnEndTurn.setEnabled(false);
 			}
 		});
@@ -377,7 +372,9 @@ public class MonopolyBoard extends JFrame{
 				payrentPopUp.setRentAmount(temp.calculateRent());
 				payrentPopUp.calculateRemaining();
 				payrentPopUp.show();
-				payrentPopUp.setRentDeed(temp);
+				if(payrentPopUp.success) {
+					MonopolyGameController.payRent(temp.calculateRent());	
+				}
 			}
 		}
 
@@ -405,6 +402,19 @@ public class MonopolyBoard extends JFrame{
 		}else {
 			btnRoll.setEnabled(true);
 		}
+
+		player_guis.get(player_count-1).balance_label.setText(current.getBalance()+" $");
+		player_guis.get(player_count-1).lblPosition.setText(prop.getName());
+		for(TitleDeed t: current.getOwnedTitleDeeds()) {
+			String temp = "";
+			temp += t.getName()+" ";
+			player_guis.get(player_count-1).deeds_label.setText(temp);
+		}
+		for(Transportation tp: current.getOwnedTransportation()) {
+			String temp = "";
+			temp += tp.getName()+" ";
+			player_guis.get(player_count-1).companies_label.setText(temp);
+		}
 	}
 
 	public void resetLabels() {
@@ -414,8 +424,8 @@ public class MonopolyBoard extends JFrame{
 		lblCurrentPosition_label.setText(prop.getName());
 		buy_panel.setVisible(false);
 	}
-	public void updatePlayerGui() {
-		player_guis.get(player_count-1).balance_label.setText(current.getBalance()+" $");
-		player_guis.get(player_count-1).lblPosition.setText(prop.getName());
-	}
+
+
+
+
 }

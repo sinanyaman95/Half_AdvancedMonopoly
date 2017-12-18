@@ -86,7 +86,7 @@ public class GUI_PlayerSetup extends JFrame{
 			}
 		});
 
-
+		new MonopolyGameController();
 
 		btnSave.setBounds(324, 70, 100, 93);
 		contentPane.add(btnSave);
