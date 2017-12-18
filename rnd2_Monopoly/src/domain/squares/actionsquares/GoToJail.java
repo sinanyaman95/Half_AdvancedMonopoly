@@ -14,6 +14,7 @@ public class GoToJail extends ActionSquare {
 		//sends the player to jail
 		p.setPosition(10);
 		p.setInJail(true);
+		p.notifyObservers();
 
 	}
 
@@ -21,6 +22,21 @@ public class GoToJail extends ActionSquare {
 	public String toString() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public static boolean repOK() {
+		//makes sure landedOn works
+		ActionSquare testSquare=new GoToJail(0);
+		Player player=new Player("TestPlayer",100);
+		int beforePosition=player.getPosition();
+		testSquare.landedOn(player);
+		int afterPosition=player.getPosition();
+		if(player.isInJail()&&player.getPosition()==10&&beforePosition!=afterPosition) {
+			return true;
+		}else {
+			return false;	
+		}
+		
 	}
 
 }

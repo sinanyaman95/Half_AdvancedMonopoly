@@ -11,12 +11,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import javax.swing.Timer;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 
+import domain.bot.IdleObserver;
+import domain.bot.JailObserver;
+import domain.bot.MonopolyBotObserver;
 import domain.cards.ChanceCard;
 import domain.cards.CommunityChestCard;
 import domain.squares.Square;
@@ -27,13 +32,10 @@ import domain.squares.actionsquares.taxes.*;
 import gui.MonopolyBoard;
 import gui.StartingScreen;
 
-/**
- * @author rnd2
- *
- */
+
 public class MonopolyGameController {
 	
-	private static MonopolyGameController instance = new MonopolyGameController();
+	//private static MonopolyGameController instance = new MonopolyGameController(); causes errors, we already create it elsewhere
 	
 	private static StartingScreen startingScreen;
 
@@ -53,16 +55,51 @@ public class MonopolyGameController {
 	
 	public static ArrayList<ChanceCard> chanceCardDeck = new ArrayList<ChanceCard>();
 	
-	public static MonopolyGameController getInstance() {
-		return instance;
-	}
+	public ArrayList<MonopolyBotObserver> observers=new ArrayList<MonopolyBotObserver>();
+	
+	int delay = 5000; //5 secs for now
 
-	public static void setInstance(MonopolyGameController instance) {
-		MonopolyGameController.instance = instance;
+	
+	public MonopolyGameController() {
+		
+		//add idle observer to game, jail observer to every player
+		new IdleObserver(this);
+		for (int i = 0; i < players.size(); i++) {
+			new JailObserver(players.get(i));
+		}
+		
+		//listener and timer for the bot
+	    ActionListener taskPerformer = new ActionListener() {
+	          public void actionPerformed(ActionEvent evt) {
+	        	  //if nothing happens notify observers somehow
+	            notifyObservers();
+	          }
+	      };
+		
+	      new Timer(delay, taskPerformer).start();
+	      
+	      initBoard();
 	}
 	
+	 public void notifyObservers(){
+	      for (MonopolyBotObserver o : observers) {
+	         o.update();
+	      }
+	   }
+	  public void attachObserver(MonopolyBotObserver o){
+	      observers.add(o);		
+	   }
+	
+	//public static MonopolyGameController getInstance() {
+	//	return instance;
+	//}
+
+	//public static void setInstance(MonopolyGameController instance) {
+	//	MonopolyGameController.instance = instance;
+//	}
+	
 	public static void initBoard() {
-		startingScreen = new StartingScreen();
+		
 		
         squareList[0] = new GoSquare(0);
         TitleDeed MediterraneanAve = new TitleDeed(1, "Mediterranean Avenue", "purple", 60, 2,30, 0,0,0,50);

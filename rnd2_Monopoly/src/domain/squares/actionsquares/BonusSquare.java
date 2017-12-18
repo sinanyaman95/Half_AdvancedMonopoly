@@ -21,4 +21,18 @@ public class BonusSquare extends ActionSquare {
 		return null;
 	}
 
+	public static boolean repOK() {
+		ActionSquare test =new BonusSquare(0);
+		Player player = new Player("TestPlayer",100);
+		double beforeBalance=player.getBalance();
+		test.landedOn(player);
+		double afterBalance=player.getBalance();
+		if(beforeBalance+300==afterBalance) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+
 }

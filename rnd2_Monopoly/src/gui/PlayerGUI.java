@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -18,9 +17,8 @@ public class PlayerGUI{
 	
 	public JPanel playerStatPanel=new JPanel();
 	public JLabel balance_label;
-	public JLabel name_label;
-	public JComboBox comboBox_TitleDeeds;
-	public JComboBox comboBox_Companies;
+	public JLabel deeds_label;
+	public JLabel companies_label;
 	public JLabel lblPosition;
 	/*
 	public JLabel playerNameLabel=new JLabel();
@@ -28,6 +26,7 @@ public class PlayerGUI{
 	*/
 	
 	public PlayerGUI(Player p) {
+		
 		
 		playerStatPanel.setBackground(new Color(127, 255, 212));
 		playerStatPanel.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(0, 0, 255)));
@@ -38,7 +37,7 @@ public class PlayerGUI{
 		name_label_header.setHorizontalAlignment(SwingConstants.CENTER);
 		playerStatPanel.add(name_label_header);
 		
-		name_label = new JLabel("");
+		JLabel name_label = new JLabel("");
 		name_label.setHorizontalAlignment(SwingConstants.CENTER);
 		playerStatPanel.add(name_label);
 		
@@ -56,26 +55,18 @@ public class PlayerGUI{
 		deeds_label_header.setHorizontalAlignment(SwingConstants.CENTER);
 		playerStatPanel.add(deeds_label_header);
 		
-		JPanel panel_titleDeeds = new JPanel();
-		panel_titleDeeds.setBackground(new Color(127, 255, 212));
-		playerStatPanel.add(panel_titleDeeds);
-		panel_titleDeeds.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		comboBox_TitleDeeds = new JComboBox();
-		panel_titleDeeds.add(comboBox_TitleDeeds);
+		deeds_label = new JLabel("New label");
+		deeds_label.setHorizontalAlignment(SwingConstants.CENTER);
+		playerStatPanel.add(deeds_label);
 		
 		JLabel companies_label_header = new JLabel("Companies :");
 		companies_label_header.setFont(new Font("Tahoma", Font.BOLD, 11));
 		companies_label_header.setHorizontalAlignment(SwingConstants.CENTER);
 		playerStatPanel.add(companies_label_header);
 		
-		JPanel panel_companies = new JPanel();
-		panel_companies.setBackground(new Color(127, 255, 212));
-		playerStatPanel.add(panel_companies);
-		panel_companies.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		comboBox_Companies = new JComboBox();
-		panel_companies.add(comboBox_Companies);
+		companies_label = new JLabel("");
+		companies_label.setHorizontalAlignment(SwingConstants.CENTER);
+		playerStatPanel.add(companies_label);
 		
 		JLabel lblPosition_header = new JLabel("Position :");
 		lblPosition_header.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -85,6 +76,7 @@ public class PlayerGUI{
 		lblPosition = new JLabel("New label");
 		lblPosition.setHorizontalAlignment(SwingConstants.CENTER);
 		playerStatPanel.add(lblPosition);
+		
 
 		name_label.setText(p.getName());
 		
