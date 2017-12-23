@@ -13,7 +13,7 @@ public class AdvanceToTheStockExchange extends ChanceCard {
 		
 		
 		
-		
+		p.setPosition(108);
 
 		
 		

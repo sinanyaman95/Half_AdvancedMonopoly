@@ -9,22 +9,25 @@ import domain.MonopolyGameController;
 
 public class IdleObserver extends MonopolyBotObserver {
 	
-public IdleObserver(MonopolyGameController subject) {
-	  this.gameSubject = subject;
-      this.gameSubject.attachObserver(this);
-      
-  
-   
- 
-      
+
+
+	public IdleObserver() {
+	// TODO Auto-generated constructor stub
 }
 
 	@Override
 	public void update() {
 		//show bored emotion
-		System.out.println("Bored");//test
+		MonopolyGameController.gamebot.setEmotion("Bored");
+		//System.out.println(emotion);//test
 	    
 	  
+	}
+
+	@Override
+	public void setEmotion(String emo) {
+		this.emotion=emo;
+		
 	}
 
 

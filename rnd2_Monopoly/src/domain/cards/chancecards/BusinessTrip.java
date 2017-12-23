@@ -1,7 +1,9 @@
 package domain.cards.chancecards;
 
+import domain.MonopolyGameController;
 import domain.Player;
 import domain.cards.ChanceCard;
+import domain.cards.TravelVoucherCard;
 
 public class BusinessTrip extends ChanceCard {
 
@@ -11,7 +13,8 @@ public class BusinessTrip extends ChanceCard {
 
 	public void doCardAction(Player p) {
 		
-		
+		TravelVoucherCard travelCard= MonopolyGameController.drawTravelCard();
+		p.cardInventory.add(travelCard);
 		//p.addCardInventory Travel Voucher!!!!!!!!!!!!!!!!!!!
 
 	}

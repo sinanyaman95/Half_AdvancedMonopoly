@@ -12,7 +12,7 @@ public class BankErrorInYourFavor extends CommunityChestCard {
 
 	@Override
 	public void doCardAction(Player p) {
-		// TODO Auto-generated method stub
+		p.setBalance(p.getBalance()+200);
 		
 	}
 

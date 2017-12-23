@@ -8,6 +8,12 @@ public class PayObserver extends MonopolyBotObserver {
 		
 	}
 
+	@Override
+	public void setEmotion(String emo) {
+		this.emotion=emo;
+		
+	}
+
 
 	
 

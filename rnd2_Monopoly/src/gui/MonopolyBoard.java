@@ -265,6 +265,8 @@ public class MonopolyBoard extends JFrame{
 				first_roll=false;
 				rolled = true;
 				updateGui();
+				MonopolyGameController.neutralObserver.update();
+				MonopolyGameController.idleTimer.restart();
 				btnEndTurn.setEnabled(true);
 			}
 		});
@@ -306,6 +308,8 @@ public class MonopolyBoard extends JFrame{
 					
 					updateGui();
 					updatePlayerGui();
+					MonopolyGameController.neutralObserver.update();
+					MonopolyGameController.idleTimer.restart();
 					buy_panel.setVisible(false);
 				}
 			}
@@ -373,6 +377,8 @@ public class MonopolyBoard extends JFrame{
 				current.setCheckTurn(true);
  
 				updateGui();
+				MonopolyGameController.neutralObserver.update();
+				MonopolyGameController.idleTimer.restart();
 				resetLabels();
 				isBuyed= false;
 				btnEndTurn.setEnabled(false);
@@ -404,8 +410,8 @@ public class MonopolyBoard extends JFrame{
 					payrentPopUp.setRentAmount(temp.calculateRent());
 					payrentPopUp.calculateRemaining();
 					payrentPopUp.show();
-					payrentPopUp.setOwnerGuý(findGUIbyName(temp.getOwner().getName()));
-					payrentPopUp.setCurrentGuý(findGUIbyName(current.getName()));
+					payrentPopUp.setOwnerGuÄ±(findGUIbyName(temp.getOwner().getName()));
+					payrentPopUp.setCurrentGuÄ±(findGUIbyName(current.getName()));
 					payrentPopUp.setRentDeed(temp);
 				}
 			}

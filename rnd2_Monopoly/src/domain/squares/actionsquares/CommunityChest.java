@@ -1,8 +1,9 @@
 package domain.squares.actionsquares;
 
 import java.util.ArrayList;
+import java.util.Random;
 
-
+import domain.MonopolyGameController;
 import domain.Player;
 import domain.cards.CommunityChestCard;
 
@@ -15,14 +16,20 @@ public class CommunityChest extends ActionSquare {
 
 	@Override
 	public void landedOn(Player p) {
-		// TODO Auto-generated method stub
+		Random rnd=new Random();
+		int  n = rnd.nextInt(2);
+		
+	domain.cards.CommunityChestCard pickedCard=	MonopolyGameController.communityDeck.get(n);
+	
+	pickedCard.doCardAction(p);
+		
 
 	}
 
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return null;
+		return "Community Chest Square";
 	}
 
 }
