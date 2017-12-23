@@ -6,6 +6,7 @@ public class ReverseDirection extends ActionSquare {
 
 	public ReverseDirection(int index) {
 		super(index);
+		this.name = "Reverse Direction";
 		// TODO Auto-generated constructor stub
 	}
 

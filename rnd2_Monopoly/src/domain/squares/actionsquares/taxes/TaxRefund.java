@@ -7,6 +7,7 @@ public class TaxRefund extends ActionSquare {
 
 	public TaxRefund(int index) {
 		super(index);
+		this.name = "Tax Refund";
 		// TODO Auto-generated constructor stub
 	}
 

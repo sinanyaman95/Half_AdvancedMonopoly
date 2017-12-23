@@ -6,6 +6,7 @@ public class FreeParking extends ActionSquare {
 
 	public FreeParking(int index) {
 		super(index);
+		this.name = "Free Parking";
 		// TODO Auto-generated constructor stub
 	}
 

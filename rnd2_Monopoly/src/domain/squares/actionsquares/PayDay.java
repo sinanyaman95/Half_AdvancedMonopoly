@@ -6,6 +6,7 @@ public class PayDay extends ActionSquare {
 
 	public PayDay(int index) {
 		super(index);
+		this.name = "Pay Day";
 		// TODO Auto-generated constructor stub
 	}
 

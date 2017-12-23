@@ -7,6 +7,7 @@ public class LuxuryTax extends ActionSquare {
 
 	public LuxuryTax(int index) {
 		super(index);
+		this.name = "Luxury Tax";
 		// TODO Auto-generated constructor stub
 	}
 

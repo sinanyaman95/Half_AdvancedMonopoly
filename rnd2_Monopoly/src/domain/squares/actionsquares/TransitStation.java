@@ -6,6 +6,7 @@ public class TransitStation extends ActionSquare {
 
 	public TransitStation(int index, int i, String string) {
 		super(index);
+		this.name = "Transit Station";
 		// TODO Auto-generated constructor stub
 	}
 

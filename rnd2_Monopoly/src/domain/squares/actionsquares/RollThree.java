@@ -6,6 +6,7 @@ public class RollThree extends ActionSquare {
 
 	public RollThree(int index) {
 		super(index);
+		this.name = "Roll Three";
 		// TODO Auto-generated constructor stub
 	}
 

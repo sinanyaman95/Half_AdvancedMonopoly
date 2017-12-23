@@ -11,6 +11,7 @@ public class Chance extends ActionSquare {
 
 	public Chance(int index, ArrayList<ChanceCard> chanceCardDeck) {
 		super(index);
+		this.name = "Chance";
 		// TODO Auto-generated constructor stub
 	}
 

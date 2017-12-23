@@ -6,6 +6,7 @@ public class Subway extends ActionSquare {
 
 	public Subway(int index) {
 		super(index);
+		this.name = "Subway";
 		// TODO Auto-generated constructor stub
 	}
 

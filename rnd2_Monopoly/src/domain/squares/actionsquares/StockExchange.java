@@ -6,6 +6,7 @@ public class StockExchange extends ActionSquare {
 
 	public StockExchange(int index) {
 		super(index);
+		this.name = "Stock Exchange";
 		// TODO Auto-generated constructor stub
 	}
 
