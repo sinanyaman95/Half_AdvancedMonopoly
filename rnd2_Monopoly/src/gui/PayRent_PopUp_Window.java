@@ -8,6 +8,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import domain.MonopolyGameController;
+import domain.squares.propertysquares.TitleDeed;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +31,10 @@ public class PayRent_PopUp_Window extends JDialog {
 	private JLabel lblRemainingBalance_label;
 	private JLabel lblPropertyname;
 	private JLabel lblOwner_label;
+	private TitleDeed rent_deed;
+	private PlayerGUI owner;
+	private PlayerGUI current;
+
 	public boolean success = false;
 	
 	public PayRent_PopUp_Window() {
@@ -78,7 +86,7 @@ public class PayRent_PopUp_Window extends JDialog {
 		
 		lblPropertyname = new JLabel("Property_Name");
 		lblPropertyname.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblPropertyname.setBounds(55, 46, 122, 24);
+		lblPropertyname.setBounds(21, 46, 184, 24);
 		contentPanel.add(lblPropertyname);
 		
 		JLabel lblOwner = new JLabel("Owner :");
@@ -110,6 +118,13 @@ public class PayRent_PopUp_Window extends JDialog {
 							JOptionPane.showMessageDialog(null, "Game Over! \nYou are bankrupted!!!");
 							
 						}else {
+
+							System.out.println(MonopolyGameController.getCurrentPlayer().getName()+" is current");
+							System.out.println(rent_deed.getOwner().getName()+" is owner");
+							MonopolyGameController.payRent(rent_deed,rent_deed.calculateRent());
+							current.balance_label.setText(MonopolyGameController.getCurrentPlayer().getBalance()+" $");
+							owner.balance_label.setText(rent_deed.getOwner().getBalance()+" $");
+							setVisible(false);
 							success = true;
 							
 						}
@@ -133,5 +148,18 @@ public class PayRent_PopUp_Window extends JDialog {
 	}
 	public void setOwner(String name) {
 		lblOwner_label.setText(name);
+	}
+
+	public boolean isSucceed() {
+		return this.success;
+	}
+	public void setRentDeed(TitleDeed deed) {
+		this.rent_deed=deed;
+	}
+	public void setOwnerGuý(PlayerGUI p) {
+		owner=p;
+	}
+	public void setCurrentGuý(PlayerGUI p) {
+		current=p;
 	}
 }

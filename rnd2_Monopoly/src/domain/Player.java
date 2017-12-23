@@ -12,6 +12,7 @@ import domain.squares.propertysquares.BuildingFacade;
 import domain.squares.propertysquares.PropertySquare;
 import domain.squares.propertysquares.TitleDeed;
 import domain.squares.propertysquares.Transportation;
+import domain.squares.propertysquares.Utility;
 
 public class Player {
 	@SerializedName("checkTurn")
@@ -38,7 +39,12 @@ public class Player {
 	@SerializedName("Owned_Transportation")
 	@Expose
 	ArrayList<Transportation> ownedTransportation=new ArrayList<Transportation>();
+	
+	@SerializedName("Owned_Utility")
+	@Expose
+	ArrayList<Utility> ownedUtility=new ArrayList<Utility>();
 
+	
 	@SerializedName("isInJail")
 	@Expose
 	private boolean isInJail;
@@ -78,7 +84,13 @@ public class Player {
 		this.position = position;
 	}
 
-	
+	public ArrayList<Utility> getOwnedUtility() {
+		return ownedUtility;
+	}
+	public void setOwnedUtility(ArrayList<Utility> ownedUtility) {
+		this.ownedUtility = ownedUtility;
+	}
+
 
 	public void buyProperty(PropertySquare p) {
 		p.performPurchase(this, p);
