@@ -1,5 +1,6 @@
 package domain.cards.communitychestcards;
 
+import domain.MonopolyGameController;
 import domain.Player;
 import domain.cards.CommunityChestCard;
 
@@ -11,13 +12,19 @@ public class YouAreGettingMarried extends CommunityChestCard {
 	}
 
 	public void doCardAction(Player p) {
-		// TODO Auto-generated method stub
+
+		for (int i = 0; i < MonopolyGameController.players.size(); i++) {
+			Player temp = MonopolyGameController.players.get(i);
+			temp.setBalance(temp.getBalance() - 25);
+		}
+
+		p.setBalance(p.getBalance() + (25*MonopolyGameController.players.size()));
 
 	}
 
 	@Override
 	public void setCardDescription(String desc) {
-		// TODO Auto-generated method stub
+		desc = "Collect $25 from each player as\r\n" + "a wedding gift.";
 		
 	}
 

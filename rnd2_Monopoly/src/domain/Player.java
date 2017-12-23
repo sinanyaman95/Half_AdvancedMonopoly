@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 import domain.bot.JailObserver;
 import domain.bot.MonopolyBotObserver;
+import domain.cards.Card;
 import domain.squares.propertysquares.BuildingFacade;
 import domain.squares.propertysquares.PropertySquare;
 import domain.squares.propertysquares.TitleDeed;
@@ -55,6 +56,8 @@ public class Player {
 	public BuildingFacade buildingFacade;
 	
 	public ArrayList<MonopolyBotObserver> playerObservers=new ArrayList<MonopolyBotObserver>();
+
+	public ArrayList<Card> cardInventory= new ArrayList<Card>();
 	
 	public Player(String name, double balance) {
 		this.name=name;

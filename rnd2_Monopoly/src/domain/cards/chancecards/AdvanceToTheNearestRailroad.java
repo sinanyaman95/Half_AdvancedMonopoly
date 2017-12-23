@@ -11,19 +11,20 @@ public class AdvanceToTheNearestRailroad extends ChanceCard {
 
 	public void doCardAction(Player p) {
 
-	//moveTo nearest railroad	
-		/*
-		 int ct=p.getPosition();
-		  while(! ct= cabposition){
-		  
-		  ct++;
-		 
-		  }
-		  player.setpos(ct);
-		  
-		  
-		 
-		 */
+		if(p.getPosition()==7) {
+			p.setPosition(15);
+			
+		}else if(p.getPosition()==22||p.getPosition()==50||p.getPosition()==61||p.getPosition()==70) {
+			p.setPosition(75);
+		
+		}else if(p.getPosition()==36||p.getPosition()==94) {
+			p.setPosition(47);
+		
+		}else if(p.getPosition()==112) {
+			p.setPosition(35);
+		
+		}
+		
 		
 	}
 	  @Override

@@ -11,13 +11,15 @@ public class GoToJail extends CommunityChestCard {
 	}
 
 	public void doCardAction(Player p) {
-		// TODO Auto-generated method stub
+		p.setInJail(true);
+		p.setPosition(10);
 
 	}
 
 	@Override
 	public void setCardDescription(String desc) {
-		// TODO Auto-generated method stub
+		desc= "Go directly to Jail. Do not pass any Pay\r\n" + 
+				"Corner. Do not collect any money.";
 		
 	}
 

@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-
+import java.util.Random;
 
 import javax.swing.Timer;
 
@@ -22,9 +22,12 @@ import com.google.gson.Gson;
 
 import domain.bot.IdleObserver;
 import domain.bot.JailObserver;
+import domain.bot.MonopolyBot;
 import domain.bot.MonopolyBotObserver;
+import domain.bot.NeutralObserver;
 import domain.cards.ChanceCard;
 import domain.cards.CommunityChestCard;
+import domain.cards.TravelVoucherCard;
 import domain.squares.Square;
 import domain.squares.actionsquares.*;
 import domain.squares.propertysquares.*;
@@ -55,43 +58,78 @@ public class MonopolyGameController {
 	public static ArrayList<CommunityChestCard> communityDeck = new ArrayList<CommunityChestCard>();
 
 	public static ArrayList<ChanceCard> chanceCardDeck = new ArrayList<ChanceCard>();
+	
+	public static ArrayList<TravelVoucherCard> travelCardDeck = new ArrayList<TravelVoucherCard>();
+	
+	public static Timer idleTimer;
+	public static Timer jailTimer;
+	public static Timer emotionTimer;
 
-	public ArrayList<MonopolyBotObserver> observers=new ArrayList<MonopolyBotObserver>();
+	public static MonopolyBot gamebot = new MonopolyBot();
+
+	public static NeutralObserver neutralObserver = new NeutralObserver();
+	public static IdleObserver idleObserver = new IdleObserver();
+	public static JailObserver jailObserver = new JailObserver();
+	
+	public static double poolMoney=0;
 
 	public static double bidAmount = 0;
 
-	int delay = 5000; //5 secs for now
+
+	int idleTime = 30000; // 30 seconds
+	int jailTime = 1000;
+	int emotionTime = 5000;//might change it later
 
 
 	public MonopolyGameController() {
 
-		//add idle observer to game, jail observer to every player
-		new IdleObserver(this);
+		// add idle observer to game, jail observer to every player
+
 		for (int i = 0; i < players.size(); i++) {
 			new JailObserver(players.get(i));
 		}
 
-		//listener and timer for the bot
-		ActionListener taskPerformer = new ActionListener() {
+	
+		ActionListener idleTask = new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				//if nothing happens notify observers somehow
-				notifyObservers();
+				
+				idleObserver.update();
+
 			}
 		};
 
-		new Timer(delay, taskPerformer).start();
+		
+		ActionListener jailTask = new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				
+				for (int i = 0; i < players.size(); i++) {
+					if(players.get(i).isInJail()) {
+						jailObserver.update();
+					}
+				}
+
+			}
+		};
+		
+		ActionListener emotionTask = new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				//print bot's current emotion in every 5 seconds
+			System.out.println(gamebot.emotion);
+
+			}
+		};
+
+		jailTimer = new Timer(jailTime, jailTask);
+		idleTimer = new Timer(idleTime, idleTask);
+		emotionTimer = new Timer(emotionTime, emotionTask);
+		jailTimer.start();
+		idleTimer.start();
+		emotionTimer.start();
 
 		initBoard();
+	
 	}
 
-	public void notifyObservers(){
-		for (MonopolyBotObserver o : observers) {
-			o.update();
-		}
-	}
-	public void attachObserver(MonopolyBotObserver o){
-		observers.add(o);		
-	}
 
 	//public static MonopolyGameController getInstance() {
 	//	return instance;
@@ -638,7 +676,7 @@ public class MonopolyGameController {
 				currentPlayer.setBalance(currentPlayer.getBalance()+200);
 			}
 
-			//payday parasý tek cift ayri
+			//payday parasï¿½ tek cift ayri
 			if (nextLocation == 68) { 
 				if (rolledDice % 2 == 0) {
 					currentPlayer.setBalance(currentPlayer.getBalance()+400);
@@ -711,6 +749,20 @@ public class MonopolyGameController {
 		tempPlayer.setOwnedUtility(util);
 		
 		return tempPlayer;
+	}
+	
+	public static double getPoolMoney() {
+		return poolMoney;
+	}
+
+	public static void setPoolMoney(double poolMoney) {
+		MonopolyGameController.poolMoney = poolMoney;
+	}
+	
+	public static TravelVoucherCard drawTravelCard() {
+		Random rand = new Random();
+		int cardindex =rand.nextInt(3);
+		return MonopolyGameController.travelCardDeck.get(cardindex);
 	}
 
 }
