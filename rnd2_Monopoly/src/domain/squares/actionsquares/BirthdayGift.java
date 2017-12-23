@@ -16,6 +16,7 @@ public class BirthdayGift extends ActionSquare{
 
 	public BirthdayGift(int index) {
         super(index);
+        this.name = "Birthday Gift";
     }
 
 	@Override

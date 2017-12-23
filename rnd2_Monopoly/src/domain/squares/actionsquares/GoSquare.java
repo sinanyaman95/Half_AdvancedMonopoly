@@ -6,6 +6,7 @@ public class GoSquare extends ActionSquare {
 
 	public GoSquare(int index) {
 		super(index);
+		this.name = "Go";
 		// TODO Auto-generated constructor stub
 	}
 

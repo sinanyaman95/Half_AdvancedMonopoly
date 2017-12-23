@@ -6,6 +6,7 @@ public class SqueezePlay extends ActionSquare {
 
 	public SqueezePlay(int index) {
 		super(index);
+		this.name = "Squeeze Play";
 		// TODO Auto-generated constructor stub
 	}
 

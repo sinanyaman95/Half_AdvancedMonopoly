@@ -410,14 +410,15 @@ public class MonopolyBoard extends JFrame{
 					payrentPopUp.setRentAmount(temp.calculateRent());
 					payrentPopUp.calculateRemaining();
 					payrentPopUp.show();
-					payrentPopUp.setOwnerGuÄ±(findGUIbyName(temp.getOwner().getName()));
-					payrentPopUp.setCurrentGuÄ±(findGUIbyName(current.getName()));
+					payrentPopUp.setOwnerGuý(findGUIbyName(temp.getOwner().getName()));
+					payrentPopUp.setCurrentGuý(findGUIbyName(current.getName()));
 					payrentPopUp.setRentDeed(temp);
 				}
 			}
 			if(prop.getClass() == Chance.class ) {
 				Chance temp = (Chance) prop;
 				TakeCard_PopUp_Window cardWindow = new TakeCard_PopUp_Window();
+				cardWindow.setSquare(prop);
 				cardWindow.setCardType("Chance");
 				cardWindow.setCardDescription(temp.toString());
 				cardWindow.show();

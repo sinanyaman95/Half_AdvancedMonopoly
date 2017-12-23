@@ -6,6 +6,7 @@ public class HollandTunnel extends ActionSquare {
 
 	public HollandTunnel(int index, int i) {
 		super(index);
+		this.name = "Holland Tunnel";
 		// TODO Auto-generated constructor stub
 	}
 

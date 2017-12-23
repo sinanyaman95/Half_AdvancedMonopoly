@@ -6,6 +6,7 @@ public class BonusSquare extends ActionSquare {
 
 	public BonusSquare(int index) {
 		super(index);
+		this.name = "Bonus Square";
 		// TODO Auto-generated constructor stub
 	}
 

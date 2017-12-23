@@ -7,6 +7,7 @@ public class IncomeTax extends ActionSquare {
 
 	public IncomeTax(int index) {
 		super(index);
+		this.name = "Income Tax";
 		// TODO Auto-generated constructor stub
 	}
 

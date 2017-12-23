@@ -6,6 +6,7 @@ public class GoToJail extends ActionSquare {
 
 	public GoToJail(int index) {
 		super(index);
+		this.name = "GO TO JAIL";
 		// TODO Auto-generated constructor stub
 	}
 

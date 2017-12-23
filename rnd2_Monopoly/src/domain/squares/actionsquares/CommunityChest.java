@@ -11,6 +11,7 @@ public class CommunityChest extends ActionSquare {
 
 	public CommunityChest(int index, ArrayList<CommunityChestCard> communityDeck) {
 		super(index);
+		this.name = "Community Chest";
 		// TODO Auto-generated constructor stub
 	}
 

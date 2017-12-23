@@ -9,6 +9,7 @@ public class Utility extends PropertySquare {
 	public Utility(int i, String string) {
 		// TODO Auto-generated constructor stub
 		super();
+		this.name = string;
 	}
 
 	@Override
