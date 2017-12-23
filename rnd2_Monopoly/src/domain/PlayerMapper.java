@@ -10,17 +10,17 @@ public class PlayerMapper {
 	
 	@SerializedName("players")
 	@Expose
-	private ArrayList<Player> players = null;
+	private ArrayList<LoadablePlayer> players = null;
 
-	public ArrayList<Player> getPlayers() {
+	public ArrayList<LoadablePlayer> getPlayers() {
 	return players;
 	}
 
-	public void setPlayers(ArrayList<Player> players) {
+	public void setPlayers(ArrayList<LoadablePlayer> players) {
 	this.players = players;
 	}
 
-	public PlayerMapper withPlayers(ArrayList<Player> players) {
+	public PlayerMapper withPlayers(ArrayList<LoadablePlayer> players) {
 	this.players = players;
 	return this;
 	}

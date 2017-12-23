@@ -14,6 +14,9 @@ import org.json.simple.parser.ParseException;
 
 import domain.MonopolyGameController;
 import domain.Player;
+import domain.squares.propertysquares.TitleDeed;
+import domain.squares.propertysquares.Transportation;
+import domain.squares.propertysquares.Utility;
 
 import javax.swing.JComboBox;
 import java.awt.event.ItemListener;
@@ -35,7 +38,7 @@ public class StartingScreen {
 	public StartingScreen() {
 		initialize();
 		this.frame.setVisible(true);
-		
+
 	}
 
 	/**
@@ -66,13 +69,27 @@ public class StartingScreen {
 
 		btnLoadGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new MonopolyGameController();
 				try {
 					if(MonopolyGameController.LoadGame()) {
 						frame.setVisible(false);
 						monopolyBoard = new MonopolyBoard();
 						for(Player p: MonopolyGameController.players) {
 							System.out.println(p.getName());
+							for(TitleDeed td: p.getOwnedTitleDeeds()) {
+								monopolyBoard.findGUIbyName(p.getName()).comboBox_TitleDeeds.addItem(td.getName());
+								System.out.println(td.getName());
+							}
+							for(Transportation td: p.getOwnedTransportation()) {
+								monopolyBoard.findGUIbyName(p.getName()).comboBox_Companies.addItem(td.getName());
+								System.out.println(td.getName());
+							}
+							for(Utility td: p.getOwnedUtility()) {
+								monopolyBoard.findGUIbyName(p.getName()).comboBox_Companies.addItem(td.getName());
+								System.out.println(td.getName());
+							}
 						}
+				
 					}
 
 				} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException
@@ -105,7 +122,7 @@ public class StartingScreen {
 		comboBox.setBounds(316, 111, 71, 22);
 		frame.getContentPane().add(comboBox);
 
-			if(comboBox.getSelectedItem()==null) btnStartGame.setEnabled(false);
-		
+		if(comboBox.getSelectedItem()==null) btnStartGame.setEnabled(false);
+
 	}
 }
