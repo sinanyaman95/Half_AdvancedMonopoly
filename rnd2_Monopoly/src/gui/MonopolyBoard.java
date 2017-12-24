@@ -410,8 +410,8 @@ public class MonopolyBoard extends JFrame{
 					payrentPopUp.setRentAmount(temp.calculateRent());
 					payrentPopUp.calculateRemaining();
 					payrentPopUp.show();
-					payrentPopUp.setOwnerGuý(findGUIbyName(temp.getOwner().getName()));
-					payrentPopUp.setCurrentGuý(findGUIbyName(current.getName()));
+					payrentPopUp.setOwnerGui(findGUIbyName(temp.getOwner().getName()));
+					payrentPopUp.setCurrentGui(findGUIbyName(current.getName()));
 					payrentPopUp.setRentDeed(temp);
 				}
 			}
@@ -466,6 +466,7 @@ public class MonopolyBoard extends JFrame{
 		
 		
 	
+		
 		
 		
 		
