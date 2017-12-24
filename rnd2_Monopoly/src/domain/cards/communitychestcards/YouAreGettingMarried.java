@@ -23,13 +23,19 @@ public class YouAreGettingMarried extends CommunityChestCard {
 	}
 
 	@Override
-	public void setCardDescription(String desc) {
-		desc = "Collect $25 from each player as\r\n" + "a wedding gift.";
+	public String toString() {
+		return "Collect $25 from each player as\r\n" + "a wedding gift.";
 		
 	}
 
 	@Override
 	public void setCardType(String type) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setCardDescription(String desc) {
 		// TODO Auto-generated method stub
 		
 	}

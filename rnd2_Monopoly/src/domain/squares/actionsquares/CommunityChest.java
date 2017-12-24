@@ -9,6 +9,8 @@ import domain.cards.CommunityChestCard;
 
 public class CommunityChest extends ActionSquare {
 
+	private CommunityChestCard pickedCard;
+	
 	public CommunityChest(int index, ArrayList<CommunityChestCard> communityDeck) {
 		super(index);
 		this.name = "Community Chest";
@@ -17,20 +19,22 @@ public class CommunityChest extends ActionSquare {
 
 	@Override
 	public void landedOn(Player p) {
-		Random rnd=new Random();
-		int  n = rnd.nextInt(2);
-		
-	domain.cards.CommunityChestCard pickedCard=	MonopolyGameController.communityDeck.get(n);
-	
+
 	pickedCard.doCardAction(p);
 		
-
 	}
 
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "Community Chest Square";
+		return pickedCard.toString();
+	}
+	
+	public void pickCard() {
+		Random rnd=new Random();
+		int  n = rnd.nextInt(2);
+		
+	pickedCard=	MonopolyGameController.communityDeck.get(n);
 	}
 
 }
