@@ -83,7 +83,7 @@ public class MonopolyBoard extends JFrame{
 	}
 
 	private void initialize() {
-		
+		MonopolyBotGUI bot=new MonopolyBotGUI();
 		
 		getContentPane().setBackground(new Color(64, 224, 208));
 		setBounds(100, 100, 1920, 1080);
@@ -96,13 +96,15 @@ public class MonopolyBoard extends JFrame{
 		monopolyBoard.setBounds(38, 0, 993, 1007);
 		getContentPane().add(monopolyBoard);
 		monopolyBoard.setIcon(
-				new ImageIcon(MonopolyBoard.class.getResource("/pics/ultimate_monopoly_by_jonizaak-d5wgqgs.png")));
+				new ImageIcon(MonopolyBoard.class.getResource("/gui/pics/ultimate_monopoly_by_jonizaak-d5wgqgs.png")));
 
 		maingame_panel=new JPanel();
 		maingame_panel.setBounds(1036,11,682,983);
 		maingame_panel.setBackground(new Color(65, 105, 225));
 		maingame_panel.setLayout(null);
 		getContentPane().add(maingame_panel);
+		
+		
 
 		players_panel=new JPanel();
 		players_panel.setBounds(25, 27, 629, 513);
@@ -110,12 +112,16 @@ public class MonopolyBoard extends JFrame{
 		players_panel.setPreferredSize(new Dimension(450, 400));
 		maingame_panel.add(players_panel);
 		players_panel.setLayout(new GridLayout(3, 2, 0, 0));
+		
+		
 
 		gameplay_panel = new JPanel();
 		gameplay_panel.setBackground(new Color(65, 105, 225));
 		gameplay_panel.setBounds(25, 551, 629, 421);
 		maingame_panel.add(gameplay_panel);
 		gameplay_panel.setLayout(null);
+		
+		
 
 		lblTurn = new JLabel("Turn :");
 		lblTurn.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -236,7 +242,10 @@ public class MonopolyBoard extends JFrame{
 		btnExit = new JButton("Exit");
 		btnExit.setBounds(1744, 103, 139, 23);
 		getContentPane().add(btnExit);
-
+		
+		bot.botPanel.setBounds(1744,130, 200, 200);
+		getContentPane().add(bot.botPanel);
+		
 		current =MonopolyGameController.getCurrentPlayer();
 		position = current.getPosition();
 		prop = MonopolyGameController.squareList[position];
