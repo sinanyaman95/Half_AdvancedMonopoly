@@ -469,6 +469,7 @@ public class MonopolyBoard extends JFrame{
 		
 		
 		
+		
 		lblTurn_label.setText(current.getName());
 
 

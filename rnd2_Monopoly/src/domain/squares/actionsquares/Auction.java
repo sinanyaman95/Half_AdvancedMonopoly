@@ -7,6 +7,7 @@ public class Auction extends ActionSquare{
 	public Auction(int index) {
 		super(index);
 		// TODO Auto-generated constructor stub
+		
 		this.name = "Auction";
 	}
 

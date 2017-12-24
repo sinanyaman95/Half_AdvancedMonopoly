@@ -162,4 +162,5 @@ public class PayRent_PopUp_Window extends JDialog {
 	public void setCurrentGui(PlayerGUI p) {
 		current=p;
 	}
+	
 }
