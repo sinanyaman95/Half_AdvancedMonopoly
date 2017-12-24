@@ -156,10 +156,10 @@ public class PayRent_PopUp_Window extends JDialog {
 	public void setRentDeed(TitleDeed deed) {
 		this.rent_deed=deed;
 	}
-	public void setOwnerGuý(PlayerGUI p) {
+	public void setOwnerGui(PlayerGUI p) {
 		owner=p;
 	}
-	public void setCurrentGuý(PlayerGUI p) {
+	public void setCurrentGui(PlayerGUI p) {
 		current=p;
 	}
 }
