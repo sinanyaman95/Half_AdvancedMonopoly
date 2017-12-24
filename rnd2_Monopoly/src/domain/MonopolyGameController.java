@@ -20,11 +20,13 @@ import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 
+import domain.bot.BankruptObserver;
 import domain.bot.IdleObserver;
 import domain.bot.JailObserver;
 import domain.bot.MonopolyBot;
 import domain.bot.MonopolyBotObserver;
 import domain.bot.NeutralObserver;
+import domain.bot.PayObserver;
 import domain.cards.ChanceCard;
 import domain.cards.CommunityChestCard;
 import domain.cards.TravelVoucherCard;
@@ -77,6 +79,8 @@ public class MonopolyGameController {
 	public static NeutralObserver neutralObserver = new NeutralObserver();
 	public static IdleObserver idleObserver = new IdleObserver();
 	public static JailObserver jailObserver = new JailObserver();
+	public static PayObserver payObserver = new PayObserver();
+	public static BankruptObserver bankruptObserver = new BankruptObserver();
 	
 	public static double poolMoney=0;
 

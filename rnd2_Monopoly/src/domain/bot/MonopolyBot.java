@@ -16,6 +16,8 @@ public  class MonopolyBot extends MonopolyBotObserver {
 		this.emotion=emo;
 	}
 	
-	
+	public String getEmotion() {
+		return this.emotion;
+	}
 
 }
