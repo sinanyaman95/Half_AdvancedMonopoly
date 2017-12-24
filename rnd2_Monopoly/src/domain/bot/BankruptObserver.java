@@ -1,16 +1,11 @@
 package domain.bot;
 
-import domain.MonopolyGameController;
-
 public class BankruptObserver extends MonopolyBotObserver {
 
-	public BankruptObserver() {
-		
-	}
 
 	@Override
 	public void update() {
-		MonopolyGameController.gamebot.setEmotion("Afraid");
+		// TODO Auto-generated method stub
 
 	}
 

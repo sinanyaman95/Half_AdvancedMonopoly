@@ -9,6 +9,7 @@ import gui.TakeCard_PopUp_Window;
 
 public class Chance extends ActionSquare {
 
+	private ChanceCard pickedCard;
 	public Chance(int index, ArrayList<ChanceCard> chanceCardDeck) {
 		super(index);
 		this.name = "Chance";
@@ -17,11 +18,6 @@ public class Chance extends ActionSquare {
 
 	@Override
 	public void landedOn(Player p) {
-		
-		
-		int randomCardIndex = 0;
-
-		ChanceCard pickedCard = MonopolyGameController.chanceCardDeck.get(randomCardIndex);
 
 		pickedCard.doCardAction(p);
 
@@ -30,7 +26,12 @@ public class Chance extends ActionSquare {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return null;
+		return pickedCard.toString();
+	}
+	public void pickCard() {
+		int randomCardIndex = 0;
+
+		pickedCard = MonopolyGameController.chanceCardDeck.get(randomCardIndex);
 	}
 
 }

@@ -17,14 +17,21 @@ public class GoToJail extends CommunityChestCard {
 	}
 
 	@Override
-	public void setCardDescription(String desc) {
-		desc= "Go directly to Jail. Do not pass any Pay\r\n" + 
+	public String toString() {
+		return "Go directly to Jail. Do not pass any Pay\r\n" + 
 				"Corner. Do not collect any money.";
+		
+	}
+	
+
+	@Override
+	public void setCardType(String type) {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void setCardType(String type) {
+	public void setCardDescription(String desc) {
 		// TODO Auto-generated method stub
 		
 	}

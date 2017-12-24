@@ -56,6 +56,12 @@ public class MonopolyBoard extends JFrame{
 	public JLabel lblTotalMove_label;
 	public JLabel lblBuyable_property_name;
 	public JLabel lblBuyable_price_label;
+	public static JLabel lblProperty_Name_Label;
+	public static JLabel lblProp_Owner_Label;
+	public static JLabel lblHouses_amount;
+	public static JLabel lblHotels_amount;
+	public static JLabel lblSkyscrapper_amount;
+
 
 	private int position = 0;
 	private static Square prop;
@@ -64,27 +70,27 @@ public class MonopolyBoard extends JFrame{
 	private static int player_count = 1;
 	private boolean rolled = false;
 	private boolean isBuyed = false;
-	
+
 
 	private static ArrayList<PlayerGUI> player_guis;
 
 	public MonopolyBoard() {
 		player_guis = new ArrayList<PlayerGUI>();
 
-		
+
 		updatePlayerGui();
 		initialize();
 		setVisible(true);
 		lblTurn_label.setText(current.getName());
 		btnEndTurn.setEnabled(false);
 		resetLabels();
-		
+
 
 	}
 
 	private void initialize() {
-		MonopolyBotGUI bot=new MonopolyBotGUI();
-		
+
+
 		getContentPane().setBackground(new Color(64, 224, 208));
 		setBounds(100, 100, 1920, 1080);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,15 +102,13 @@ public class MonopolyBoard extends JFrame{
 		monopolyBoard.setBounds(38, 0, 993, 1007);
 		getContentPane().add(monopolyBoard);
 		monopolyBoard.setIcon(
-				new ImageIcon(MonopolyBoard.class.getResource("/gui/pics/ultimate_monopoly_by_jonizaak-d5wgqgs.png")));
+				new ImageIcon(MonopolyBoard.class.getResource("/pics/ultimate_monopoly_by_jonizaak-d5wgqgs.png")));
 
 		maingame_panel=new JPanel();
 		maingame_panel.setBounds(1036,11,682,983);
 		maingame_panel.setBackground(new Color(65, 105, 225));
 		maingame_panel.setLayout(null);
 		getContentPane().add(maingame_panel);
-		
-		
 
 		players_panel=new JPanel();
 		players_panel.setBounds(25, 27, 629, 513);
@@ -112,16 +116,12 @@ public class MonopolyBoard extends JFrame{
 		players_panel.setPreferredSize(new Dimension(450, 400));
 		maingame_panel.add(players_panel);
 		players_panel.setLayout(new GridLayout(3, 2, 0, 0));
-		
-		
 
 		gameplay_panel = new JPanel();
 		gameplay_panel.setBackground(new Color(65, 105, 225));
 		gameplay_panel.setBounds(25, 551, 629, 421);
 		maingame_panel.add(gameplay_panel);
 		gameplay_panel.setLayout(null);
-		
-		
 
 		lblTurn = new JLabel("Turn :");
 		lblTurn.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -242,13 +242,92 @@ public class MonopolyBoard extends JFrame{
 		btnExit = new JButton("Exit");
 		btnExit.setBounds(1744, 103, 139, 23);
 		getContentPane().add(btnExit);
-		
-		bot.botPanel.setBounds(1744,130, 200, 200);
-		getContentPane().add(bot.botPanel);
-		
+
+		JPanel panel_Selected_Property = new JPanel();
+		panel_Selected_Property.setBackground(new Color(65, 105, 225));
+		panel_Selected_Property.setBounds(1728, 152, 166, 400);
+		getContentPane().add(panel_Selected_Property);
+		panel_Selected_Property.setLayout(null);
+
+		lblProperty_Name_Label = new JLabel("Property");
+		lblProperty_Name_Label.setHorizontalAlignment(SwingConstants.CENTER);
+		lblProperty_Name_Label.setForeground(new Color(230, 230, 250));
+		lblProperty_Name_Label.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblProperty_Name_Label.setBounds(10, 5, 146, 28);
+		panel_Selected_Property.add(lblProperty_Name_Label);
+
+		JLabel lblProp_Owner = new JLabel("Owner :");
+		lblProp_Owner.setForeground(new Color(255, 255, 255));
+		lblProp_Owner.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblProp_Owner.setBounds(21, 37, 71, 14);
+		panel_Selected_Property.add(lblProp_Owner);
+
+		lblProp_Owner_Label = new JLabel("0");
+		lblProp_Owner_Label.setForeground(new Color(255, 255, 255));
+		lblProp_Owner_Label.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblProp_Owner_Label.setBounds(21, 62, 123, 14);
+		panel_Selected_Property.add(lblProp_Owner_Label);
+
+		JButton btnBuildHotel = new JButton("Build Hotel");
+		btnBuildHotel.setBounds(21, 321, 123, 23);
+		panel_Selected_Property.add(btnBuildHotel);
+
+		JButton btnBuildSkyscrapper = new JButton("Build Skyscrapper");
+		btnBuildSkyscrapper.setBounds(21, 355, 123, 23);
+		panel_Selected_Property.add(btnBuildSkyscrapper);
+
+		JButton btnBuildHouse = new JButton("Build House");
+		btnBuildHouse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnBuildHouse.setBounds(21, 287, 123, 23);
+		panel_Selected_Property.add(btnBuildHouse);
+
+		JLabel lblHouses = new JLabel("Houses :");
+		lblHouses.setForeground(Color.WHITE);
+		lblHouses.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblHouses.setBounds(21, 87, 100, 23);
+		panel_Selected_Property.add(lblHouses);
+
+		JLabel lblHotel = new JLabel("Hotel :");
+		lblHotel.setForeground(Color.WHITE);
+		lblHotel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblHotel.setBounds(21, 139, 100, 23);
+		panel_Selected_Property.add(lblHotel);
+
+		JLabel lblSkyscrapper = new JLabel("Skyscrapper :");
+		lblSkyscrapper.setForeground(Color.WHITE);
+		lblSkyscrapper.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblSkyscrapper.setBounds(21, 188, 106, 23);
+		panel_Selected_Property.add(lblSkyscrapper);
+
+		lblHouses_amount = new JLabel("0");
+		lblHouses_amount.setForeground(Color.WHITE);
+		lblHouses_amount.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblHouses_amount.setBounds(21, 114, 123, 14);
+		panel_Selected_Property.add(lblHouses_amount);
+
+		lblHotels_amount = new JLabel("0");
+		lblHotels_amount.setForeground(Color.WHITE);
+		lblHotels_amount.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblHotels_amount.setBounds(21, 163, 123, 14);
+		panel_Selected_Property.add(lblHotels_amount);
+
+		lblSkyscrapper_amount = new JLabel("0");
+		lblSkyscrapper_amount.setForeground(Color.WHITE);
+		lblSkyscrapper_amount.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblSkyscrapper_amount.setBounds(21, 218, 123, 14);
+		panel_Selected_Property.add(lblSkyscrapper_amount);
+
+
 		current =MonopolyGameController.getCurrentPlayer();
 		position = current.getPosition();
 		prop = MonopolyGameController.squareList[position];
+
+
+
+
 
 
 		btnRoll.addActionListener(new ActionListener() {
@@ -285,7 +364,7 @@ public class MonopolyBoard extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 				if(prop.getBuyable().getBuyableType()) {
 
 					isBuyed = true;
@@ -314,7 +393,7 @@ public class MonopolyBoard extends JFrame{
 							findGUIbyName(current.getName()).comboBox_Companies.addItem(prop.getName());
 						}
 					}
-					
+
 					updateGui();
 					updatePlayerGui();
 					MonopolyGameController.neutralObserver.update();
@@ -363,11 +442,11 @@ public class MonopolyBoard extends JFrame{
 				// TODO Auto-generated method stub
 				//Auction initialization
 				first_roll = true;	
-				
+
 				if(first_roll && !isBuyed) {
 					if(prop.getClass() == TitleDeed.class || prop.getClass() == Transportation.class || prop.getClass() == Utility.class) {
-					Auction auction_panel = new Auction(prop,current,MonopolyGameController.bidAmount);
-					auction_panel.show();	
+						Auction auction_panel = new Auction(prop,current,MonopolyGameController.bidAmount);
+						auction_panel.show();	
 					}
 				}
 				//================================
@@ -378,13 +457,13 @@ public class MonopolyBoard extends JFrame{
 				}
 
 				player_count ++;
-				
+
 				current = MonopolyGameController.players.get(player_count-1);
 				position = current.getPosition();
 				prop = MonopolyGameController.squareList[position];
-				
+
 				current.setCheckTurn(true);
- 
+
 				updateGui();
 				MonopolyGameController.neutralObserver.update();
 				MonopolyGameController.idleTimer.restart();
@@ -394,11 +473,44 @@ public class MonopolyBoard extends JFrame{
 			}
 		});
 
+		btnBuildHouse.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				current.buildHouse((TitleDeed) findTitleDeedByName(lblProperty_Name_Label.getText()));
+			}
+		});
+		btnBuildHotel.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				current.buildHotel((TitleDeed) findTitleDeedByName(lblProperty_Name_Label.getText()));
+			}
+		});
+		btnBuildSkyscrapper.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				current.buildSkyscraper((TitleDeed) findTitleDeedByName(lblProperty_Name_Label.getText()));
+			}
+		});
+
 		for (Player p : MonopolyGameController.players) {
+
 
 			PlayerGUI g=new PlayerGUI(p);
 
+			g.setLblHotels_amount(lblHotels_amount);
+			g.setLblHouses_amount(lblHouses_amount);
+			g.setLblProp_Owner_Label(lblProp_Owner_Label);
+			g.setLblProperty_Name_Label(lblProperty_Name_Label);
+			g.setLblSkyscrapper_amount(lblSkyscrapper_amount);
 			player_guis.add(g);
+
+
 
 			players_panel.add(g.playerStatPanel);
 		}
@@ -419,8 +531,8 @@ public class MonopolyBoard extends JFrame{
 					payrentPopUp.setRentAmount(temp.calculateRent());
 					payrentPopUp.calculateRemaining();
 					payrentPopUp.show();
-					payrentPopUp.setOwnerGui(findGUIbyName(temp.getOwner().getName()));
-					payrentPopUp.setCurrentGui(findGUIbyName(current.getName()));
+					payrentPopUp.setOwnerGuý(findGUIbyName(temp.getOwner().getName()));
+					payrentPopUp.setCurrentGuý(findGUIbyName(current.getName()));
 					payrentPopUp.setRentDeed(temp);
 				}
 			}
@@ -429,19 +541,21 @@ public class MonopolyBoard extends JFrame{
 				TakeCard_PopUp_Window cardWindow = new TakeCard_PopUp_Window();
 				cardWindow.setSquare(prop);
 				cardWindow.setCardType("Chance");
+				temp.pickCard();
 				cardWindow.setCardDescription(temp.toString());
 				cardWindow.show();
 			}else if(prop.getClass() == CommunityChest.class) {
 				CommunityChest temp = (CommunityChest) prop;
 				TakeCard_PopUp_Window cardWindow = new TakeCard_PopUp_Window();
 				cardWindow.setCardType("Community");
-				cardWindow.setCardDescription(temp.toString());
 				cardWindow.setSquare(prop);
+				temp.pickCard();
+				cardWindow.setCardDescription(temp.toString());
 				cardWindow.show();
 			}
 		}
 		//================================================
-		
+
 		// Buy Panel initialization
 		if(prop.getBuyable().getBuyableType()){
 
@@ -472,12 +586,12 @@ public class MonopolyBoard extends JFrame{
 			buy_panel.setVisible(false);
 		}
 		//=========================================
-		
-		
-	
-		
-		
-		
+
+
+
+
+
+
 		lblTurn_label.setText(current.getName());
 
 
@@ -518,5 +632,66 @@ public class MonopolyBoard extends JFrame{
 			}
 		}
 		return null;
+	}
+	public static TitleDeed findTitleDeedByName(String name) {
+		TitleDeed temp = null;
+		for(Square s: MonopolyGameController.squareList) {
+			if(s.getName().equalsIgnoreCase(name)) {
+				temp = (TitleDeed) s;
+				break;
+			}
+		}
+		return temp;
+	}
+	public void updatePropGuý() {
+		TitleDeed temp_Title = MonopolyBoard.findTitleDeedByName(findGUIbyName(current.getName()).comboBox_TitleDeeds.getSelectedItem().toString());
+		System.out.println(temp_Title.getOwner().getName());
+		System.out.println("Temp TÝTLE : " +temp_Title.toString());
+		if(temp_Title.getOwner().isCheckTurn()){
+			lblProp_Owner_Label.setText(temp_Title.getOwner().getName());
+			lblProperty_Name_Label.setText(temp_Title.getName());
+			lblHouses_amount.setText(temp_Title.getNumberOfHouses()+"");
+			lblHotels_amount.setText(temp_Title.getNumberOfHotels()+"");
+			lblSkyscrapper_amount.setText(temp_Title.getNumberOfSkyscrapers()+"");
+		}
+	}
+	public static JLabel getLblProperty_Name_Label() {
+		return lblProperty_Name_Label;
+	}
+
+	public static void setLblProperty_Name_Label(String name) {
+		lblProperty_Name_Label.setText(name);
+	}
+
+	public static JLabel getLblProp_Owner_Label() {
+		return lblProp_Owner_Label;
+	}
+
+	public static void setLblProp_Owner_Label(String name) {
+		lblProp_Owner_Label.setText(name);
+	}
+
+	public static JLabel getLblHouses_amount() {
+		return lblHouses_amount;
+	}
+
+	public static void setLblHouses_amount(String name) {
+		lblHouses_amount.setText(name);
+	}
+
+	public static JLabel getLblHotels_amount() {
+		return lblHotels_amount;
+	}
+
+	public static void setLblHotels_amount(String name) {
+		lblHotels_amount.setText(name);
+	}
+
+	public static JLabel getLblSkyscrapper_amount() {
+		return lblSkyscrapper_amount;
+	}
+
+	public static void setLblSkyscrapper_amount(String name) {
+		lblSkyscrapper_amount.setText(name);
 	}
 }

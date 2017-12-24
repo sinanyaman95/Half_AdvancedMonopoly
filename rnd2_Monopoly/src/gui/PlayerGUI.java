@@ -2,6 +2,8 @@ package gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -22,6 +24,13 @@ public class PlayerGUI{
 	public JComboBox comboBox_TitleDeeds;
 	public JComboBox comboBox_Companies;
 	public JLabel lblPosition;
+	public  JLabel lblProperty_Name_Label;
+	public  JLabel lblProp_Owner_Label;
+	public  JLabel lblHouses_amount;
+	public  JLabel lblHotels_amount;
+	
+
+	public  JLabel lblSkyscrapper_amount;
 	/*
 	public JLabel playerNameLabel=new JLabel();
 	public JTextArea propList=new JTextArea();
@@ -88,7 +97,23 @@ public class PlayerGUI{
 
 		name_label.setText(p.getName());
 		
-		
+		comboBox_TitleDeeds.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				TitleDeed temp_Title = MonopolyBoard.findTitleDeedByName(comboBox_TitleDeeds.getSelectedItem().toString());
+				System.out.println(temp_Title.getOwner().getName());
+				System.out.println("Temp TÝTLE : " +temp_Title.toString());
+				if(temp_Title.getOwner().isCheckTurn()){
+				lblProp_Owner_Label.setText(temp_Title.getOwner().getName());
+				lblProperty_Name_Label.setText(temp_Title.getName());
+				lblHouses_amount.setText(temp_Title.getNumberOfHouses()+"");
+				lblHotels_amount.setText(temp_Title.getNumberOfHotels()+"");
+				lblSkyscrapper_amount.setText(temp_Title.getNumberOfSkyscrapers()+"");
+				}
+			}
+		});
 		
 		
 		
@@ -106,6 +131,45 @@ public class PlayerGUI{
 		playerStatPanel.add(playerNameLabel);
 		playerStatPanel.add(propList);
 		*/
+	}
+	public JLabel getLblProperty_Name_Label() {
+		return lblProperty_Name_Label;
+	}
+
+	public void setLblProperty_Name_Label(JLabel lblProperty_Name_Label) {
+		this.lblProperty_Name_Label = lblProperty_Name_Label;
+	}
+
+	public JLabel getLblProp_Owner_Label() {
+		return lblProp_Owner_Label;
+	}
+
+	public void setLblProp_Owner_Label(JLabel lblProp_Owner_Label) {
+		this.lblProp_Owner_Label = lblProp_Owner_Label;
+	}
+
+	public JLabel getLblHouses_amount() {
+		return lblHouses_amount;
+	}
+
+	public void setLblHouses_amount(JLabel lblHouses_amount) {
+		this.lblHouses_amount = lblHouses_amount;
+	}
+
+	public JLabel getLblHotels_amount() {
+		return lblHotels_amount;
+	}
+
+	public void setLblHotels_amount(JLabel lblHotels_amount) {
+		this.lblHotels_amount = lblHotels_amount;
+	}
+
+	public JLabel getLblSkyscrapper_amount() {
+		return lblSkyscrapper_amount;
+	}
+
+	public void setLblSkyscrapper_amount(JLabel lblSkyscrapper_amount) {
+		this.lblSkyscrapper_amount = lblSkyscrapper_amount;
 	}
 
 }

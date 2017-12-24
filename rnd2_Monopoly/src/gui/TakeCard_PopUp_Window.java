@@ -44,11 +44,13 @@ public class TakeCard_PopUp_Window extends JDialog{
 						//findChanceCardbyDesc().doCardAction(MonopolyGameController.getCurrentPlayer());
 						Chance temp = (Chance) cardSquare;
 						temp.landedOn(MonopolyGameController.getCurrentPlayer());
+						MonopolyBoard.updatePlayerGui();
 						setVisible(false);
 					}else if(cardType == "Community") {
 						//findCommunityCardbyDesc().doCardAction(MonopolyGameController.getCurrentPlayer());
 						CommunityChest temp = (CommunityChest) cardSquare;
 						temp.landedOn(MonopolyGameController.getCurrentPlayer());
+						MonopolyBoard.updatePlayerGui();
 						setVisible(false);
 					}
 				}

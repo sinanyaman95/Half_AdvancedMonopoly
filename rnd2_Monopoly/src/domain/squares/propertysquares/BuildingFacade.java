@@ -1,5 +1,7 @@
 package domain.squares.propertysquares;
 
+import javax.swing.JOptionPane;
+
 import domain.Player;
 
 /**
@@ -30,7 +32,9 @@ public class BuildingFacade {
 		if(houseCheck.houseAvailable(p, property)) {
 			property.setNumberOfHouses(property.getNumberOfHouses() + 1);
 			p.setBalance(p.getBalance()-property.getHouseCost());
-		}	
+		}else {
+			JOptionPane.showMessageDialog(null, "Error at building house to "+property.getName());
+		}
 	}
 	
 	/**
@@ -43,6 +47,8 @@ public class BuildingFacade {
 		if(hotelCheck.HotelAvailable(p, property)) {
 			property.setNumberOfHotels(property.getNumberOfHotels() + 1);
 			p.setBalance(p.getBalance()-property.getHotelCost());
+		}else {
+			JOptionPane.showMessageDialog(null, "Error at building hotel to "+property.getName());
 		}
 	}
 	
@@ -56,6 +62,8 @@ public class BuildingFacade {
 		if(skyscraperCheck.skyscraperAvailable(p, property)) {
 			property.setNumberOfSkyscrapers(property.getNumberOfSkyscrapers() + 1);
 			p.setBalance(p.getBalance()-property.getSkyscraperCost());
+		}else {
+			JOptionPane.showMessageDialog(null, "Error at building skyscrapper to "+property.getName());
 		}
 	}
 	

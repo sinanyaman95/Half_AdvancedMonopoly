@@ -81,7 +81,6 @@ public class GUI_PlayerSetup extends JFrame{
 					if(counter == 0) {	
 						setVisible(false);
 						new MonopolyBoard();
-						//new MonopolyBotGUI();
 					}
 				}
 			}

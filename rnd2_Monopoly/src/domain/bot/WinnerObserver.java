@@ -1,21 +1,19 @@
 package domain.bot;
 
-public  class MonopolyBot extends MonopolyBotObserver {
+public class WinnerObserver extends MonopolyBotObserver {
 
-	public MonopolyBot() {
-		this.emotion="Neutral";
-	}
+
 
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		System.out.println(emotion);
+
 	}
-	
+
+	@Override
 	public void setEmotion(String emo) {
 		this.emotion=emo;
 	}
-	
-	
+
 
 }

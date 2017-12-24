@@ -53,7 +53,7 @@ public class Player {
 	
 	@SerializedName("buildingFacade")
 	@Expose
-	public BuildingFacade buildingFacade;
+	public BuildingFacade buildingFacade = new BuildingFacade();
 	
 	public ArrayList<MonopolyBotObserver> playerObservers=new ArrayList<MonopolyBotObserver>();
 
