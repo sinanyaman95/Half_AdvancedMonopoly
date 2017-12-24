@@ -17,7 +17,9 @@ public class GoToJailCard extends ChanceCard {
 	}
 	@Override
     public String toString() {
-        return  "Go to Jail";
+        return  "Go directly to Jail.\r\n" + 
+        		"Do not pass any Pay Corner.\r\n" + 
+        		"Do not collect any money.";
     }
 
 	@Override
@@ -31,5 +33,7 @@ public class GoToJailCard extends ChanceCard {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 
 }

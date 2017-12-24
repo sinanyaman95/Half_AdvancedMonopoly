@@ -243,7 +243,7 @@ public class MonopolyBoard extends JFrame{
 		btnExit.setBounds(1744, 103, 139, 23);
 		getContentPane().add(btnExit);
 		
-		bot.botPanel.setBounds(1744,130, 200, 200);
+		bot.botPanel.setBounds(1734,570, 200, 200);
 		getContentPane().add(bot.botPanel);
 
 		JPanel panel_Selected_Property = new JPanel();
@@ -342,6 +342,7 @@ public class MonopolyBoard extends JFrame{
 				MonopolyGameController.die2.roll();
 				int die1 = Integer.parseInt(MonopolyGameController.die1.getFaceValue());
 				int die2 = Integer.parseInt(MonopolyGameController.die2.getFaceValue());
+
 				lblFaceVal1_label.setText(MonopolyGameController.die1.getFaceValue());
 				lblFaceVal2_label.setText(MonopolyGameController.die2.getFaceValue());
 				lblTotalMove_label.setText(""+(die1+die2));
@@ -353,12 +354,18 @@ public class MonopolyBoard extends JFrame{
 				lblCurrentPosition_label.setText(MonopolyGameController.squareList[position].getName());
 				System.out.println(current.getName()+": "+position);
 				System.out.println(MonopolyGameController.squareList[position].getClass().toString());
+				if(die1 == die2) {
+					first_roll = true;
+					btnEndTurn.setEnabled(false);
+				}else {
 				first_roll=false;
+				btnEndTurn.setEnabled(true);
+				}
 				rolled = true;
 				updateGui();
 				MonopolyGameController.neutralObserver.update();
 				MonopolyGameController.idleTimer.restart();
-				btnEndTurn.setEnabled(true);
+				//btnEndTurn.setEnabled(true);
 			}
 		});
 

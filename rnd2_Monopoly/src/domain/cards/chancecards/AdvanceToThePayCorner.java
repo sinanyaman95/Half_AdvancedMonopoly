@@ -29,7 +29,10 @@ public class AdvanceToThePayCorner extends ChanceCard{
 	}
 	@Override
     public String toString() {
-        return  "Advance to the Pay Corner";
+        return  "Advance to the Pay Corner"+"Collect your income for landing there from the Bank.\\r\\n"+
+        		"On the Outer Track -“Payday” - $400 \r\n"+
+        		"On the Center Track - “Go” - $200 \r\n"+
+        		"On the Inner Track -“Bonus” - $300";
     }
 
 	@Override

@@ -26,5 +26,10 @@ public class InsurancePremiumsDue extends CommunityChestCard {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public String toString() {
+		return "Pay $50 to the pool.";
+		
+	}
 
 }

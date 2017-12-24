@@ -28,4 +28,9 @@ public class BankErrorInYourFavor extends CommunityChestCard {
 		
 	}
 
+	@Override
+	public String toString() {
+		return "Collect $200 from the bank.";
+		
+	}
 }

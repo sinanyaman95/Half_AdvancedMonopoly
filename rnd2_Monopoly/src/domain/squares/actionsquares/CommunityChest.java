@@ -32,7 +32,7 @@ public class CommunityChest extends ActionSquare {
 	
 	public void pickCard() {
 		Random rnd=new Random();
-		int  n = rnd.nextInt(2);
+		int  n = rnd.nextInt(4);
 		
 	pickedCard=	MonopolyGameController.communityDeck.get(n);
 	}
