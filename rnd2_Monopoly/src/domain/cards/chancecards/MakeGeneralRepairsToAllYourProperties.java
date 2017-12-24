@@ -32,7 +32,9 @@ public class MakeGeneralRepairsToAllYourProperties extends ChanceCard {
 	}
 	@Override
     public String toString() {
-        return  "Make General Repairs To All Your Properties";
+        return  "Make General Repairs To All Your Properties\r\n"+"$25 per House, Cab Stand, and\r\n" + 
+        		"Transit Station\r\n" + 
+        		"$100 per Hotel and Skyscraper";
     }
 
 	@Override

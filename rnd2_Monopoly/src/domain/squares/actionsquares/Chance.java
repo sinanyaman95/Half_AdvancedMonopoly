@@ -1,6 +1,7 @@
 package domain.squares.actionsquares;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import domain.MonopolyGameController;
 import domain.Player;
@@ -29,7 +30,10 @@ public class Chance extends ActionSquare {
 		return pickedCard.toString();
 	}
 	public void pickCard() {
-		int randomCardIndex = 0;
+		
+		Random rnd=new Random();
+	
+		int randomCardIndex =rnd.nextInt(5);
 
 		pickedCard = MonopolyGameController.chanceCardDeck.get(randomCardIndex);
 	}

@@ -89,7 +89,7 @@ public class MonopolyBoard extends JFrame{
 	}
 
 	private void initialize() {
-
+		MonopolyBotGUI bot=new MonopolyBotGUI();
 
 		getContentPane().setBackground(new Color(64, 224, 208));
 		setBounds(100, 100, 1920, 1080);
@@ -102,7 +102,7 @@ public class MonopolyBoard extends JFrame{
 		monopolyBoard.setBounds(38, 0, 993, 1007);
 		getContentPane().add(monopolyBoard);
 		monopolyBoard.setIcon(
-				new ImageIcon(MonopolyBoard.class.getResource("/pics/ultimate_monopoly_by_jonizaak-d5wgqgs.png")));
+				new ImageIcon(MonopolyBoard.class.getResource("/gui/pics/ultimate_monopoly_by_jonizaak-d5wgqgs.png")));
 
 		maingame_panel=new JPanel();
 		maingame_panel.setBounds(1036,11,682,983);
@@ -242,6 +242,9 @@ public class MonopolyBoard extends JFrame{
 		btnExit = new JButton("Exit");
 		btnExit.setBounds(1744, 103, 139, 23);
 		getContentPane().add(btnExit);
+		
+		bot.botPanel.setBounds(1734,570, 200, 200);
+		getContentPane().add(bot.botPanel);
 
 		JPanel panel_Selected_Property = new JPanel();
 		panel_Selected_Property.setBackground(new Color(65, 105, 225));
@@ -339,6 +342,7 @@ public class MonopolyBoard extends JFrame{
 				MonopolyGameController.die2.roll();
 				int die1 = Integer.parseInt(MonopolyGameController.die1.getFaceValue());
 				int die2 = Integer.parseInt(MonopolyGameController.die2.getFaceValue());
+
 				lblFaceVal1_label.setText(MonopolyGameController.die1.getFaceValue());
 				lblFaceVal2_label.setText(MonopolyGameController.die2.getFaceValue());
 				lblTotalMove_label.setText(""+(die1+die2));
@@ -350,12 +354,18 @@ public class MonopolyBoard extends JFrame{
 				lblCurrentPosition_label.setText(MonopolyGameController.squareList[position].getName());
 				System.out.println(current.getName()+": "+position);
 				System.out.println(MonopolyGameController.squareList[position].getClass().toString());
+				if(die1 == die2) {
+					first_roll = true;
+					btnEndTurn.setEnabled(false);
+				}else {
 				first_roll=false;
+				btnEndTurn.setEnabled(true);
+				}
 				rolled = true;
 				updateGui();
 				MonopolyGameController.neutralObserver.update();
 				MonopolyGameController.idleTimer.restart();
-				btnEndTurn.setEnabled(true);
+				//btnEndTurn.setEnabled(true);
 			}
 		});
 
@@ -531,8 +541,8 @@ public class MonopolyBoard extends JFrame{
 					payrentPopUp.setRentAmount(temp.calculateRent());
 					payrentPopUp.calculateRemaining();
 					payrentPopUp.show();
-					payrentPopUp.setOwnerGuý(findGUIbyName(temp.getOwner().getName()));
-					payrentPopUp.setCurrentGuý(findGUIbyName(current.getName()));
+					payrentPopUp.setOwnerGui(findGUIbyName(temp.getOwner().getName()));
+					payrentPopUp.setCurrentGui(findGUIbyName(current.getName()));
 					payrentPopUp.setRentDeed(temp);
 				}
 			}
@@ -643,10 +653,10 @@ public class MonopolyBoard extends JFrame{
 		}
 		return temp;
 	}
-	public void updatePropGuý() {
+	public void updatePropGui() {
 		TitleDeed temp_Title = MonopolyBoard.findTitleDeedByName(findGUIbyName(current.getName()).comboBox_TitleDeeds.getSelectedItem().toString());
 		System.out.println(temp_Title.getOwner().getName());
-		System.out.println("Temp TÝTLE : " +temp_Title.toString());
+		System.out.println("Temp Tï¿½TLE : " +temp_Title.toString());
 		if(temp_Title.getOwner().isCheckTurn()){
 			lblProp_Owner_Label.setText(temp_Title.getOwner().getName());
 			lblProperty_Name_Label.setText(temp_Title.getName());
