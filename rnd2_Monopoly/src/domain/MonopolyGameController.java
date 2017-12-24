@@ -20,14 +20,19 @@ import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 
+import domain.bot.BankruptObserver;
 import domain.bot.IdleObserver;
 import domain.bot.JailObserver;
 import domain.bot.MonopolyBot;
 import domain.bot.MonopolyBotObserver;
 import domain.bot.NeutralObserver;
+import domain.bot.PayObserver;
 import domain.cards.ChanceCard;
 import domain.cards.CommunityChestCard;
 import domain.cards.TravelVoucherCard;
+import domain.cards.communitychestcards.BankErrorInYourFavor;
+import domain.cards.communitychestcards.InsurancePremiumsDue;
+import domain.cards.communitychestcards.YouAreGettingMarried;
 import domain.squares.Square;
 import domain.squares.actionsquares.*;
 import domain.squares.propertysquares.*;
@@ -70,6 +75,8 @@ public class MonopolyGameController {
 	public static NeutralObserver neutralObserver = new NeutralObserver();
 	public static IdleObserver idleObserver = new IdleObserver();
 	public static JailObserver jailObserver = new JailObserver();
+	public static PayObserver payObserver = new PayObserver();
+	public static BankruptObserver bankruptObserver = new BankruptObserver();
 	
 	public static double poolMoney=0;
 
@@ -115,6 +122,7 @@ public class MonopolyGameController {
 			public void actionPerformed(ActionEvent evt) {
 				//print bot's current emotion in every 5 seconds
 			System.out.println(gamebot.emotion);
+			
 
 			}
 		};
@@ -127,6 +135,7 @@ public class MonopolyGameController {
 		emotionTimer.start();
 
 		initBoard();
+		generateCommunityChestCardDeck(); 
 	
 	}
 
@@ -764,5 +773,14 @@ public class MonopolyGameController {
 		int cardindex =rand.nextInt(3);
 		return MonopolyGameController.travelCardDeck.get(cardindex);
 	}
+	
+	public static void generateCommunityChestCardDeck() {
+		CommunityChestCard card1 = new YouAreGettingMarried(true);
+		CommunityChestCard card2 = new BankErrorInYourFavor(true);
+		CommunityChestCard card3 = new InsurancePremiumsDue(true);
+		communityDeck.add(0, card1);
+		communityDeck.add(1, card2);
+		communityDeck.add(2, card3);
+		}
 
 }

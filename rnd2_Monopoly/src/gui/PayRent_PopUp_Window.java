@@ -116,6 +116,7 @@ public class PayRent_PopUp_Window extends JDialog {
 						
 						if(Double.parseDouble(lblRemainingBalance_label.getText())<=0) {
 							JOptionPane.showMessageDialog(null, "Game Over! \nYou are bankrupted!!!");
+							MonopolyGameController.bankruptObserver.update();
 							
 						}else {
 
@@ -126,12 +127,13 @@ public class PayRent_PopUp_Window extends JDialog {
 							owner.balance_label.setText(rent_deed.getOwner().getBalance()+" $");
 							setVisible(false);
 							success = true;
-							
+							MonopolyGameController.payObserver.update();
 						}
 					}
 				});
 			}
 		}
+		
 	}
 	
 	public void setRentAmount(double amount) {
@@ -162,5 +164,4 @@ public class PayRent_PopUp_Window extends JDialog {
 	public void setCurrentGui(PlayerGUI p) {
 		current=p;
 	}
-	
 }

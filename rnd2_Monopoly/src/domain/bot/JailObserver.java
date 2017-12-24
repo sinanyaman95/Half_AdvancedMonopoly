@@ -20,7 +20,7 @@ public class JailObserver extends MonopolyBotObserver {
 	@Override
 	public void update() {
 		// show sad emotion
-		MonopolyGameController.gamebot.setEmotion("Sad");
+		MonopolyGameController.gamebot.setEmotion("Mad");
 		//System.out.println(emotion);//test
 
 	}
